@@ -6,31 +6,33 @@
 public class Product {
     private String name;
     private String productGroup;
+    private String productCategory;
     private double price;
-    private boolean discount;
-    private double discountAmount;
 
     public Product(String name){
         this.name = name;
     }
 
-    public Product(String name, String productGroup){
+    public Product(String name, String productCategory){
         this.name = name;
-        this.productGroup = productGroup;
+        this.productCategory = productCategory;
+        findProductGroup();
     }
 
-    public Product(String name, String productGroup, double price){
+    public Product(String name, String productCategory, double price){
         this.name = name;
-        this.productGroup = productGroup;
+        this.productCategory = productCategory;
         this.price = price;
+        findProductGroup();
     }
 
-    public Product(String name, String productGroup, double price, boolean discount, double discountAmount){
-        this.name = name;
-        this.productGroup = productGroup;
-        this.price = price;
-        this.discount = discount;
-        this.discountAmount = discountAmount;
+    private void findProductGroup(){
+
+        if(productCategory.contains("Fruit") || productCategory.equals("Apples")){
+            this.productGroup = Main.productGroup[0];
+        }else{
+            this.productGroup = Main.productGroup[1];
+        }
     }
 
     public String getName(){
@@ -39,14 +41,11 @@ public class Product {
     public String getProductGroup(){
         return this.productGroup;
     }
+    public String getProductCategory(){
+        return this.productCategory;
+    }
     public double getPrice(){
         return this.price;
-    }
-    public boolean getDiscount(){
-        return this.discount;
-    }
-    public double getDiscountAmount(){
-        return this.discountAmount;
     }
     public void setName(String name){
         this.name = name;
@@ -54,32 +53,17 @@ public class Product {
     public void setProductGroup(String productGroup){
         this.productGroup = productGroup;
     }
+    public void setProductCategory(String productCategory){
+        this.productCategory = productCategory;
+    }
     public void setPrice(double price){
         this.price = price;
     }
-    public void setDiscount(boolean discount){
-        this.discount = discount;
-    }
-    public void setDiscountAmount(double discountAmount){
-        this.discountAmount = discountAmount;
-    }
+
 
     @Override
     public String toString() {
-        //TODO Make this look nice.
-        if(discount){
-            return "Product{" +
-                    "name='" + name + '\'' +
-                    ", productGroup='" + productGroup + '\'' +
-                    ", price=" + price + "kr/kg"+
-                    ", discount=" + discount +
-                    ", discountAmount=" + discountAmount +
-                    '}';
-        }else{
-            return name + ", ProductGroup: '" + productGroup + '\'' +
-                    ", Price: " + price + "kr/kg"+
-                    '}';
-        }
+        return String.format("| %-20s| %-13s| %-17s| %7.2fkr/kg |",name,productGroup,productCategory,price);
 
     }
 }
