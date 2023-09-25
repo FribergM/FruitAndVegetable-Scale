@@ -5,29 +5,29 @@
  */
 public class Product {
     private String name;
-    private String type;
-    private int price;
+    private String productGroup;
+    private double price;
     private boolean discount;
-    private int discountAmount;
+    private double discountAmount;
 
     public Product(String name){
         this.name = name;
     }
 
-    public Product(String name, String type){
+    public Product(String name, String productGroup){
         this.name = name;
-        this.type = type;
+        this.productGroup = productGroup;
     }
 
-    public Product(String name, String type, int price){
+    public Product(String name, String productGroup, double price){
         this.name = name;
-        this.type = type;
+        this.productGroup = productGroup;
         this.price = price;
     }
 
-    public Product(String name, String type, int price, boolean discount,int discountAmount){
+    public Product(String name, String productGroup, double price, boolean discount, double discountAmount){
         this.name = name;
-        this.type = type;
+        this.productGroup = productGroup;
         this.price = price;
         this.discount = discount;
         this.discountAmount = discountAmount;
@@ -36,32 +36,50 @@ public class Product {
     public String getName(){
         return this.name;
     }
-    public String getType(){
-        return this.type;
+    public String getProductGroup(){
+        return this.productGroup;
     }
-    public int getPrice(){
+    public double getPrice(){
         return this.price;
     }
     public boolean getDiscount(){
         return this.discount;
     }
-    public int getDiscountAmount(){
+    public double getDiscountAmount(){
         return this.discountAmount;
     }
     public void setName(String name){
         this.name = name;
     }
-    public void setType(String type){
-        this.type = type;
+    public void setProductGroup(String productGroup){
+        this.productGroup = productGroup;
     }
-    public void setPrice(int price){
+    public void setPrice(double price){
         this.price = price;
     }
     public void setDiscount(boolean discount){
         this.discount = discount;
     }
-    public void setDiscountAmount(int discountAmount){
+    public void setDiscountAmount(double discountAmount){
         this.discountAmount = discountAmount;
     }
 
+    @Override
+    public String toString() {
+        //TODO Make this look nice.
+        if(discount){
+            return "Product{" +
+                    "name='" + name + '\'' +
+                    ", productGroup='" + productGroup + '\'' +
+                    ", price=" + price + "kr/kg"+
+                    ", discount=" + discount +
+                    ", discountAmount=" + discountAmount +
+                    '}';
+        }else{
+            return name + ", ProductGroup: '" + productGroup + '\'' +
+                    ", Price: " + price + "kr/kg"+
+                    '}';
+        }
+
+    }
 }
