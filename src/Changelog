@@ -1,5 +1,0 @@
-Removed discount functionality completely :(
-Created productGroup variable and added setters and getters for it
-Formatted toString method
-Moved 'temporary' printAllProduct functionality from searchProduct() into its own method
-Fixed bug in initializeProducts() method.

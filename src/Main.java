@@ -158,6 +158,22 @@ public class Main {
     }
 
     public static void searchProduct(){
+
+        ArrayList<Product> tempProductList = new ArrayList<Product>();
+
+        System.out.print("\nEnter product name: ");
+        String productName = input.nextLine().toLowerCase();
+        for(ArrayList<Product> category : productList){
+            for(Product p : category){
+                if(p.getName().toLowerCase().contains(productName)|| p.getProductCategory().toLowerCase().contains(productName)){
+                    tempProductList.add(p);
+                }
+            }
+        }
+        for (Product p : tempProductList){
+            System.out.println(p);
+        }
+
         System.out.println("\nSearching for product");
         returnToMenu();
 
@@ -180,14 +196,14 @@ public class Main {
     }
     public static void printAllProducts(){
         //TODO Figure out of you need this..
-        System.out.println("------------------------------------------------------------------------");
-        System.out.printf("| %-20s| %-13s| %-17s| %-12s |%n","Product","Group","Category","Price");
-        System.out.println("------------------------------------------------------------------------");
-        for(int i=0;i<productList.length;i++){
-            for(Product p : productList[i]){
+        System.out.println("----------------------------------------------------------------------");
+        System.out.printf("%-20s| %-13s| %-17s| %-12s%n","Product","Group","Category","Price");
+        System.out.println("----------------------------------------------------------------------");
+        for (ArrayList<Product> category : productList) {
+            for (Product p : category) {
                 System.out.println(p.toString());
             }
-            System.out.println("------------------------------------------------------------------------");
+            System.out.println("----------------------------------------------------------------------");
         }
     }
     public static void returnToMenu(){
@@ -205,4 +221,5 @@ public class Main {
         }
         */
     }
+
 }
