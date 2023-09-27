@@ -13,26 +13,21 @@ public class Product {
         this.name = name;
     }
 
-    public Product(String name, String productCategory){
+    public Product(String name,String productGroup){
         this.name = name;
-        this.productCategory = productCategory;
-        findProductGroup();
+        this.productGroup = productGroup;
     }
 
-    public Product(String name, String productCategory, double price){
+    public Product(String name, String productGroup,String productCategory){
         this.name = name;
+        this.productGroup = productGroup;
+        this.productCategory = productCategory;
+    }
+    public Product(String name, String productGroup, String productCategory, double price){
+        this.name = name;
+        this.productGroup = productGroup;
         this.productCategory = productCategory;
         this.price = price;
-        findProductGroup();
-    }
-
-    private void findProductGroup(){
-
-        if(productCategory.contains("Fruit") || productCategory.equals("Apples")){
-            this.productGroup = Main.productGroup[0];
-        }else{
-            this.productGroup = Main.productGroup[1];
-        }
     }
 
     public String getName(){

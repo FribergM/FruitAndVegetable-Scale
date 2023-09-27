@@ -48,88 +48,87 @@ public class Main {
             productList[i] = new ArrayList<Product>();
         }
 
-        productList[0].add(new Product("Lemon", categories[0],42.54));
-        productList[0].add(new Product("Lime", categories[0],42.54));
-        productList[0].add(new Product("Orange", categories[0],42.54));
-        productList[0].add(new Product("Satsuma", categories[0],42.54));
-        productList[0].add(new Product("Grapefruit", categories[0],42.54));
-        productList[0].add(new Product("Clementine", categories[0],42.54));
+        productList[0].add(new Product("Lemon", productGroup[0], categories[0],42.54));
+        productList[0].add(new Product("Lime", productGroup[0], categories[0],42.54));
+        productList[0].add(new Product("Orange", productGroup[0], categories[0],42.54));
+        productList[0].add(new Product("Satsuma", productGroup[0], categories[0],42.54));
+        productList[0].add(new Product("Grapefruit", productGroup[0], categories[0],42.54));
+        productList[0].add(new Product("Clementine", productGroup[0], categories[0],42.54));
 
-        productList[1].add(new Product("Granny Smith", categories[1],42.54));
-        productList[1].add(new Product("Pink Lady", categories[1],42.54));
-        productList[1].add(new Product("Golden Delicious", categories[1],42.54));
-        productList[1].add(new Product("Royal Gala", categories[1],42.54));
+        productList[1].add(new Product("Granny Smith Apple", productGroup[0], categories[1],42.54));
+        productList[1].add(new Product("Pink Lady Apple", productGroup[0], categories[1],42.54));
+        productList[1].add(new Product("Royal Gala Apple", productGroup[0], categories[1],42.54));
 
-        productList[2].add(new Product("Peach", categories[2],42.54));
-        productList[2].add(new Product("Nectarine", categories[2],42.54));
-        productList[2].add(new Product("Apricot", categories[2],42.54));
-        productList[2].add(new Product("Plum", categories[2],42.54));
+        productList[2].add(new Product("Peach", productGroup[0], categories[2],42.54));
+        productList[2].add(new Product("Nectarine", productGroup[0], categories[2],42.54));
+        productList[2].add(new Product("Apricot", productGroup[0], categories[2],42.54));
+        productList[2].add(new Product("Plum", productGroup[0], categories[2],42.54));
 
-        productList[3].add(new Product("Banana", categories[3],42.54));
-        productList[3].add(new Product("Banana ECO", categories[3],42.54));
-        productList[3].add(new Product("Watermelon", categories[3],42.54));
-        productList[3].add(new Product("Cantaloupe", categories[3],42.54));
-        productList[3].add(new Product("Honey Melon", categories[3],42.54));
-        productList[3].add(new Product("Pear", categories[3],42.54));
+        productList[3].add(new Product("Banana", productGroup[0], categories[3],42.54));
+        productList[3].add(new Product("Banana ECO", productGroup[0], categories[3],42.54));
+        productList[3].add(new Product("Watermelon", productGroup[0], categories[3],42.54));
+        productList[3].add(new Product("Cantaloupe", productGroup[0], categories[3],42.54));
+        productList[3].add(new Product("Honey Melon", productGroup[0], categories[3],42.54));
+        productList[3].add(new Product("Pear", productGroup[0], categories[3],42.54));
 
-        productList[4].add(new Product("Carrot", categories[4],42.54));
-        productList[4].add(new Product("Parsnip", categories[4],42.54));
-        productList[4].add(new Product("Potato", categories[4],142.54));
-        productList[4].add(new Product("Sweet Potato", categories[4],142.54));
-        productList[4].add(new Product("Horseradish", categories[4],142.54));
-        productList[4].add(new Product("Beetroot", categories[4],142.54));
-        productList[4].add(new Product("Swedish Turnip", categories[4],42.54));
+        productList[4].add(new Product("Carrot", productGroup[1], categories[4],42.54));
+        productList[4].add(new Product("Parsnip", productGroup[1], categories[4],42.54));
+        productList[4].add(new Product("Potato", productGroup[1], categories[4],142.54));
+        productList[4].add(new Product("Sweet Potato", productGroup[1], categories[4],142.54));
+        productList[4].add(new Product("Horseradish", productGroup[1], categories[4],142.54));
+        productList[4].add(new Product("Beetroot", productGroup[1], categories[4],142.54));
+        productList[4].add(new Product("Swedish Turnip", productGroup[1], categories[4],42.54));
 
-        productList[5].add(new Product("Yellow Onion", categories[5],42.54));
-        productList[5].add(new Product("Red Onion", categories[5],42.54));
-        productList[5].add(new Product("White Onion", categories[5],42.54));
-        productList[5].add(new Product("Garlic", categories[5],42.54));
-        productList[5].add(new Product("Shallot", categories[5],42.54));
-        productList[5].add(new Product("Leek", categories[5],42.54));
-        productList[5].add(new Product("Green Onion", categories[5],42.54));
+        productList[5].add(new Product("Yellow Onion",productGroup[1], categories[5],42.54));
+        productList[5].add(new Product("Red Onion", productGroup[1], categories[5],42.54));
+        productList[5].add(new Product("White Onion", productGroup[1], categories[5],42.54));
+        productList[5].add(new Product("Garlic", productGroup[1], categories[5],42.54));
+        productList[5].add(new Product("Shallot", productGroup[1], categories[5],42.54));
+        productList[5].add(new Product("Leek", productGroup[1], categories[5],42.54));
+        productList[5].add(new Product("Green Onion", productGroup[1], categories[5],42.54));
 
-        productList[6].add(new Product("Chanterelle", categories[6],42.54));
-        productList[6].add(new Product("Champignon", categories[6],42.54));
-        productList[6].add(new Product("Porcini", categories[6],42.54));
-        productList[6].add(new Product("Portabello", categories[6],42.54));
-        productList[6].add(new Product("Shiitake", categories[6],42.54));
+        productList[6].add(new Product("Chanterelle", productGroup[1], categories[6],42.54));
+        productList[6].add(new Product("Champignon", productGroup[1], categories[6],42.54));
+        productList[6].add(new Product("Porcini", productGroup[1], categories[6],42.54));
+        productList[6].add(new Product("Portabello", productGroup[1], categories[6],42.54));
+        productList[6].add(new Product("Shiitake", productGroup[1], categories[6],42.54));
 
-        productList[7].add(new Product("Red Bell Pepper", categories[7],42.54));
-        productList[7].add(new Product("Yellow Bell Pepper", categories[7],42.54));
-        productList[7].add(new Product("Green Bell Pepper", categories[7],42.54));
-        productList[7].add(new Product("Red Chili", categories[7],42.54));
-        productList[7].add(new Product("Jalapeno", categories[7],42.54));
-        productList[7].add(new Product("Habanero", categories[7],42.54));
+        productList[7].add(new Product("Red Bell Pepper", productGroup[1], categories[7],42.54));
+        productList[7].add(new Product("Yellow Bell Pepper", productGroup[1], categories[7],42.54));
+        productList[7].add(new Product("Green Bell Pepper", productGroup[1], categories[7],42.54));
+        productList[7].add(new Product("Red Chili", productGroup[1], categories[7],42.54));
+        productList[7].add(new Product("Jalapeno", productGroup[1], categories[7],42.54));
+        productList[7].add(new Product("Habanero", productGroup[1], categories[7],42.54));
 
-        productList[8].add(new Product("Brussels Sprouts", categories[8],42.54));
-        productList[8].add(new Product("Broccoli", categories[8],42.54));
-        productList[8].add(new Product("Turnip", categories[8],42.54));
-        productList[8].add(new Product("Cauliflower", categories[8],42.54));
-        productList[8].add(new Product("Cabbage", categories[8],42.54));
-        productList[8].add(new Product("Red Cabbage", categories[8],42.54));
-        productList[8].add(new Product("Kale", categories[8],42.54));
+        productList[8].add(new Product("Brussels Sprouts", productGroup[1], categories[8],42.54));
+        productList[8].add(new Product("Broccoli", productGroup[1], categories[8],42.54));
+        productList[8].add(new Product("Turnip", productGroup[1], categories[8],42.54));
+        productList[8].add(new Product("Cauliflower", productGroup[1], categories[8],42.54));
+        productList[8].add(new Product("Cabbage", productGroup[1], categories[8],42.54));
+        productList[8].add(new Product("Red Cabbage", productGroup[1], categories[8],42.54));
+        productList[8].add(new Product("Kale", productGroup[1], categories[8],42.54));
 
-        productList[9].add(new Product("Ginger", categories[9],42.54));
-        productList[9].add(new Product("Cucumber", categories[9],42.54));
-        productList[9].add(new Product("Tomato", categories[9],42.54));
-        productList[9].add(new Product("Asparagus", categories[9],42.54));
-        productList[9].add(new Product("Radish", categories[9],42.54));
+        productList[9].add(new Product("Ginger", productGroup[1], categories[9],42.54));
+        productList[9].add(new Product("Cucumber", productGroup[1], categories[9],42.54));
+        productList[9].add(new Product("Tomato", productGroup[1], categories[9],42.54));
+        productList[9].add(new Product("Asparagus", productGroup[1], categories[9],42.54));
+        productList[9].add(new Product("Radish", productGroup[1], categories[9],42.54));
 
     }
 
     public static void menu(){
         while (menuLoop){
             System.out.println("""
-                    
-                    Please choose a menu option!
-                    ----------------------------
-                    1. Search for product
-                    2. Navigate to product
-                    3. Add a product
-                    4. Remove a product
-                    5. Update a product
-                    6. Print all products
-                    0. Exit program""");
+                
+                Please choose a menu option!
+                ----------------------------
+                1. Search for product
+                2. Navigate to product
+                3. Add a product
+                4. Remove a product
+                5. Update a product
+                6. Print all products
+                0. Exit program""");
 
             try {
                 System.out.print("\nYour choice: ");
@@ -158,47 +157,55 @@ public class Main {
     }
 
     public static void searchProduct(){
-
+        //TODO SPLIT INTO SMALLER METHODS, THIS IS A MESS
+        Product tempProduct;
         ArrayList<Product> tempProductList = new ArrayList<Product>();
 
-        System.out.print("\nEnter product name: ");
+        System.out.println("\nPlease enter the name of the product.\nLeave empty to return.");
+
+        System.out.print("\nProduct name: ");
         String productName = input.nextLine().toLowerCase();
-        System.out.println();
+        if(productName.isBlank()){
+            return;
+        }
         for(ArrayList<Product> category : productList){
             for(Product p : category){
-                if(p.getName().toLowerCase().contains(productName)|| p.getProductCategory().toLowerCase().contains(productName)){
+                if(p.getName().equalsIgnoreCase(productName)){
+                    System.out.println(p);
+                    break;
+                }else if(p.getName().toLowerCase().contains(productName)){
                     tempProductList.add(p);
                 }
             }
         }
-        System.out.println("-----------------------------------------------------------------------");
-        for(int i=0;i< tempProductList.size();i++){
-            System.out.println((i+1)+". "+tempProductList.get(i));
-        }
-        System.out.println("-----------------------------------------------------------------------");
-//        for (Product p : tempProductList){
-//            System.out.println(p);
-//        }
 
-        System.out.println("\nSearching for product");
-        returnToMenu();
+        if(tempProductList.isEmpty()){
+            System.out.println("\nNo product found.");
+        }else{
+            System.out.println("\nResults found:");
+            System.out.println("------------------------------------------------------------------------");
+            for(int i=0;i< tempProductList.size();i++){
+                System.out.printf("%-3s %s%n",(i+1)+".",tempProductList.get(i));
+            }
+            System.out.println("------------------------------------------------------------------------");
+        }
+
+
+        calculatePrice();
+
 
     }
     public static void navigateToProduct(){
         System.out.println("\nNavigating to product");
-        returnToMenu();
     }
     public static void addProduct(){
         System.out.println("\nAdding product");
-        returnToMenu();
     }
     public static void removeProduct(){
         System.out.println("\nRemoving product");
-        returnToMenu();
     }
     public static void updateProduct(){
         System.out.println("\nUpdating product");
-        returnToMenu();
     }
     public static void printAllProducts(){
         //TODO Figure out of you need this..
@@ -212,20 +219,8 @@ public class Main {
             System.out.println("--------------------------------------------------------------------");
         }
     }
-    public static void returnToMenu(){
-        //TODO Figure out if you need this..
-        /*
-        System.out.println("\nWould you like to return to menu? Yes/No");
-        String returnMenu = input.nextLine();
-        if(returnMenu.equalsIgnoreCase("yes")){
+    public static void calculatePrice(){
 
-        }else if(returnMenu.equalsIgnoreCase("no")){
-            System.out.println("\nExiting program");
-            menuLoop = false;
-        }else{
-            System.out.println("I didn't understand that");
-        }
-        */
     }
 
 }
