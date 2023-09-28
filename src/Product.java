@@ -55,7 +55,6 @@ public class Product {
         this.price = price;
     }
 
-
     @Override
     public String toString() {
         return String.format("%-20s| %-13s| %-17s| %7.2fkr/kg",name,productGroup,productCategory,price);
