@@ -39,7 +39,6 @@ public class Main {
             "Peppers",
             "Cole Crops",
             "Other Vegetables",
-            "Discounted Products"
         };
 
         //TODO Fix price
@@ -128,7 +127,8 @@ public class Main {
                 4. Remove a product
                 5. Update a product
                 6. Print all products
-                0. Exit program""");
+                0. Exit program
+                ----------------------------""");
 
             try {
                 System.out.print("\nYour choice: ");
@@ -187,16 +187,66 @@ public class Main {
 
     }
 
-    public static void navigateToProduct(){
-        System.out.println("\nNavigating to product");
+    private static void navigateToProduct(){
+        //TODO Check if you need this arraylist
+        ArrayList<Product> matchingProducts;
+
+        int productGroupChoice = 0;
+
+        do{
+            System.out.println("\nPRODUCT NAVIGATION\nChoose a product group. \"0\" to return to main menu.");
+            System.out.println("\nGROUPS:\n--------------");
+            for(int i=0;i<productGroup.length;i++){
+                System.out.printf("%-3s %-13s%n",(i+1)+".",productGroup[i]);
+            }
+            System.out.println("--------------");
+
+            try{
+                System.out.print("\nYour choice: ");
+                productGroupChoice = input.nextInt();
+                input.nextLine();
+
+                if(returnToMenu(productGroupChoice)){
+                    System.out.println("\nReturning to menu...");
+                    return;
+                }
+
+                if(productGroupChoice<1 || productGroupChoice>2){
+                    System.out.println("\nThat category does not exist. Try again.");
+                }
+
+            }catch(InputMismatchException e){
+                System.out.println("\nInvalid input. Try again.");
+                input.nextLine();
+
+            }
+
+
+        }while(productGroupChoice<=0 || productGroupChoice>productGroup.length);
+
+        System.out.println("\nCATEGORIES:");
+        System.out.println("--------------------");
+        if(productGroupChoice == 1){
+            for(int i=0;i<4;i++){
+                System.out.printf("%-3s %-17s%n",(i+1)+".",categories[i]);
+            }
+        }else{
+            for(int i=4;i< categories.length;i++){
+                System.out.printf("%-3s %-17s%n",(i-3)+".",categories[i]);
+            }
+        }
+        System.out.println("--------------------");
+
+
+
     }
-    public static void addProduct(){
+    private static void addProduct(){
         System.out.println("\nAdding product");
     }
-    public static void removeProduct(){
+    private static void removeProduct(){
         System.out.println("\nRemoving product");
     }
-    public static void updateProduct(){
+    private static void updateProduct(){
         System.out.println("\nUpdating product");
     }
     private static void printAllProducts(){
@@ -257,16 +307,14 @@ public class Main {
     }
     private static void printMatchingProduct(ArrayList<Product> matchingProducts){
 
-        if(!matchingProducts.isEmpty()){
-            System.out.println("\nPRODUCTS FOUND:");
-            System.out.println("------------------------------------------------------------------------");
-            for(int i=0;i< matchingProducts.size();i++){
-                System.out.printf("%-3s %s%n",(i+1)+".",matchingProducts.get(i));
-            }
-            System.out.println("------------------------------------------------------------------------");
+        System.out.println("\nPRODUCTS FOUND:");
+        System.out.println("------------------------------------------------------------------------");
+        for(int i=0;i< matchingProducts.size();i++){
+            System.out.printf("%-3s %s%n",(i+1)+".",matchingProducts.get(i));
         }
+        System.out.println("------------------------------------------------------------------------");
     }
-    public static void calculatePrice(Product chosenProduct){
+    private static void calculatePrice(Product chosenProduct){
 
         double productWeight=0;
         do{
