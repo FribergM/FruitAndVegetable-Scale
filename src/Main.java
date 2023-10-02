@@ -221,7 +221,68 @@ public class Main {
     }
     
     private static void addProduct(){
-        System.out.println("\nAdding product");
+        System.out.println("\nPRODUCT REGISTRATION\nEnter the name of the product you wish to register. \"0\" to return to main menu.");
+        System.out.print("\nProduct name: ");
+        String productName = input.nextLine().toLowerCase();
+        if(returnToMenu(productName)){
+            System.out.println("\nReturning to main...");
+            return;
+        }
+        productName = Character.toUpperCase(productName.charAt(0))+productName.substring(1); // Capitalizes name
+
+        int group = getGroupChoice();
+        if(returnToMenu(group)){
+            System.out.println("\nReturning to main...");
+            return;
+        }
+
+        int category = 0;
+        if(group == 1){
+            category = getCategoryChoice(group,1,4);
+
+            if(returnToMenu(category)){
+                System.out.println("\nReturning to main...");
+                return;
+            }
+            category-=1;
+
+        }else if(group == 2){
+            category = getCategoryChoice(group,1,6);
+
+            if(returnToMenu(category)){
+                System.out.println("\nReturning to main...");
+                return;
+            }
+            category += 3;
+        }
+
+        double productPrice = 0;
+
+        do{
+            System.out.println("\nEnter price in kr/kg for the product. \"0\" to return to main menu.");
+
+            try{
+                productPrice = input.useLocale(Locale.US).nextDouble();
+
+                if(returnToMenu(productPrice)){
+                    System.out.println("\nReturning to main...");
+                    return;
+                }
+
+            }catch(InputMismatchException e){
+                System.out.println("""
+                    
+                    Invalid input!
+                    Please make sure that:
+                    You are inputting a number.
+                    You are using US decimal point. (E.g. "1.5")""");
+                input.nextLine();
+            }
+        }while(productPrice == 0.0 || productPrice<0);
+
+        productList[category].add(new Product(productName,productGroup[group-1],categories[category],productPrice));
+        System.out.println(productName+" has been registered!");
+
     }
     private static void removeProduct(){
         System.out.println("\nRemoving product");
