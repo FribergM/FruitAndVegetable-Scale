@@ -17,6 +17,7 @@ public class Main {
     public static String[] productGroup;
     public static String[] categories;
     public static ArrayList<Product>[] productList = new ArrayList[10];
+    public static ArrayList<Product> matchingProducts = new ArrayList<Product>();
 
     public static void main(String[] args) {
         System.out.println("Welcome to the Fruit & Vegetable Scale!");
@@ -156,90 +157,69 @@ public class Main {
         }
     }
 
-    private static void searchProduct(){
-        ArrayList<Product> matchingProducts;
+    private static void searchProduct() {
 
-        do{
+        do {
             System.out.println("\nPRODUCT SEARCH\nEnter the name of the product. \"0\" to return to main menu.");
             System.out.print("\nProduct name: ");
             String productName = input.nextLine().toLowerCase();
 
-            if(returnToMenu(productName)){
+            if (returnToMenu(productName)) {
                 System.out.println("\nReturning to menu...");
                 return;
             }
-            matchingProducts = findMatchingProduct(productName);
-        }while(matchingProducts.isEmpty());
+            findMatchingProduct(productName);
+        } while (matchingProducts.isEmpty());
 
-        int productChoice = chooseMatchingProduct(matchingProducts);
-
-        if(productChoice>0){
-
-            productChoice-=1;
-            Product chosenProduct = matchingProducts.get(productChoice);
-
-            System.out.println("\nCHOSEN PRODUCT:\n--------------------------------------------------------------------");
-            System.out.println(chosenProduct);
-            System.out.println("--------------------------------------------------------------------");
-
-            calculatePrice(chosenProduct);
-        }
-
+        printChosenProduct();
+        matchingProducts.clear();
     }
 
     private static void navigateToProduct(){
-        //TODO Check if you need this arraylist
-        ArrayList<Product> matchingProducts;
 
-        int productGroupChoice = 0;
+        System.out.print("\nPRODUCT NAVIGATION");
 
-        do{
-            System.out.println("\nPRODUCT NAVIGATION\nChoose a product group. \"0\" to return to main menu.");
-            System.out.println("\nGROUPS:\n--------------");
-            for(int i=0;i<productGroup.length;i++){
-                System.out.printf("%-3s %-13s%n",(i+1)+".",productGroup[i]);
-            }
-            System.out.println("--------------");
+        int userGroupChoice = getGroupChoice();
 
-            try{
-                System.out.print("\nYour choice: ");
-                productGroupChoice = input.nextInt();
-                input.nextLine();
+        if(returnToMenu(userGroupChoice)){
+            System.out.println("\nReturning to menu...");
+            return;
+        }
 
-                if(returnToMenu(productGroupChoice)){
-                    System.out.println("\nReturning to menu...");
-                    return;
-                }
+        if(userGroupChoice == 1){
 
-                if(productGroupChoice<1 || productGroupChoice>2){
-                    System.out.println("\nThat category does not exist. Try again.");
-                }
+            int userCategoryChoice = getCategoryChoice(userGroupChoice,1,4);
 
-            }catch(InputMismatchException e){
-                System.out.println("\nInvalid input. Try again.");
-                input.nextLine();
-
+            if(returnToMenu(userCategoryChoice)){
+                System.out.println("\nReturning to menu...");
+                return;
             }
 
-
-        }while(productGroupChoice<=0 || productGroupChoice>productGroup.length);
-
-        System.out.println("\nCATEGORIES:");
-        System.out.println("--------------------");
-        if(productGroupChoice == 1){
-            for(int i=0;i<4;i++){
-                System.out.printf("%-3s %-17s%n",(i+1)+".",categories[i]);
+            int fruitIndex = userCategoryChoice-1; // Grabs Fruit Objects from productList[0-3]
+            for(Product p : productList[fruitIndex]){
+                matchingProducts.add(p);
             }
-        }else{
-            for(int i=4;i< categories.length;i++){
-                System.out.printf("%-3s %-17s%n",(i-3)+".",categories[i]);
+
+        }else if(userGroupChoice == 2){
+
+            int userCategoryChoice = getCategoryChoice(userGroupChoice,1,6);
+
+            if(returnToMenu(userCategoryChoice)){
+                System.out.println("\nReturning to menu...");
+                return;
+            }
+
+            int vegetableIndex = userCategoryChoice+3; // Grabs Vegetable Objects from productList[4-9]
+            for(Product p : productList[vegetableIndex]){
+                matchingProducts.add(p);
             }
         }
-        System.out.println("--------------------");
 
-
+        printChosenProduct();
+        matchingProducts.clear();
 
     }
+    
     private static void addProduct(){
         System.out.println("\nAdding product");
     }
@@ -249,20 +229,7 @@ public class Main {
     private static void updateProduct(){
         System.out.println("\nUpdating product");
     }
-    private static void printAllProducts(){
-        //TODO Figure out of you need this..
-        System.out.println("--------------------------------------------------------------------");
-        System.out.printf("%-20s| %-13s| %-17s| %-12s%n","Product","Group","Category","Price");
-        System.out.println("--------------------------------------------------------------------");
-        for (ArrayList<Product> category : productList) {
-            for (Product p : category) {
-                System.out.println(p.toString());
-            }
-            System.out.println("--------------------------------------------------------------------");
-        }
-    }
-    private static ArrayList<Product> findMatchingProduct(String productName){
-        ArrayList<Product> matchingProducts = new ArrayList<Product>();
+    private static void findMatchingProduct(String productName){
 
         for(ArrayList<Product> category : productList){
             for(Product p : category){
@@ -274,22 +241,80 @@ public class Main {
         if(matchingProducts.isEmpty()){
             System.out.println("\nNo product found. Try again.");
         }
-        return matchingProducts;
     }
-    private static int chooseMatchingProduct(ArrayList<Product> matchingProducts){
+    private static int getGroupChoice(){
+        int userChoice = 0;
+
+        do{
+            System.out.println("\nChoose a product group by number. \"0\" to return to main menu.");
+
+            printProductGroups();
+
+            try{
+                System.out.print("\nYour choice: ");
+                userChoice = input.nextInt();
+                input.nextLine();
+
+                if(returnToMenu(userChoice)){
+                    return 0;
+                }
+
+                if(userChoice <1 || userChoice >2){
+                    System.out.println("\nThat category does not exist. Try again.");
+                }
+
+            }catch(InputMismatchException e){
+                System.out.println("\nInvalid input. Try again.");
+                input.nextLine();
+            }
+        }while(userChoice < 1 || userChoice > 2);
+
+        return userChoice;
+    }
+    private static int getCategoryChoice(int userGroupChoice, int choiceMin, int choiceMax){
+
+        int userCategoryChoice=0;
+
+        do{
+            System.out.println("\nChoose a category by number. \"0\" to return to main menu.");
+
+            printProductCategory(userGroupChoice);
+
+            try{
+                System.out.print("\nYour choice: ");
+                userCategoryChoice = input.nextInt();
+                input.nextLine();
+
+                if(returnToMenu(userCategoryChoice)){
+                    return 0;
+                }
+
+                if(userCategoryChoice < choiceMin || userCategoryChoice > choiceMax){
+                    System.out.println("\nThat category does not exist. Try again.");
+                }
+
+            }catch(InputMismatchException e){
+                System.out.println("\nInvalid input. Try again.");
+                input.nextLine();
+            }
+        }while(userCategoryChoice < choiceMin || userCategoryChoice > choiceMax);
+
+        return userCategoryChoice;
+    }
+    private static int getProductChoice(){
         int productChoice=0;
 
         do{
-            printMatchingProduct(matchingProducts);
+            printProducts();
 
             try{
-                System.out.print("\nEnter number for the desired product. \"0\" to return to main menu.\nYour choice: ");
+                System.out.print("\nChoose a product by number. \"0\" to return to main menu.\nYour choice: ");
                 productChoice = input.nextInt();
                 input.nextLine();
 
                 if(returnToMenu(productChoice)){
                     System.out.println("\nReturning to menu...");
-                    return productChoice;
+                    return 0;
                 }
 
                 if(productChoice <1 || productChoice >matchingProducts.size()){
@@ -305,15 +330,66 @@ public class Main {
 
         return productChoice;
     }
-    private static void printMatchingProduct(ArrayList<Product> matchingProducts){
 
-        System.out.println("\nPRODUCTS FOUND:");
+    private static void printAllProducts(){
+        //TODO Figure out of you need this..
+        System.out.println("--------------------------------------------------------------------");
+        System.out.printf("%-20s| %-13s| %-17s| %-12s%n","Product","Group","Category","Price");
+        System.out.println("--------------------------------------------------------------------");
+        for (ArrayList<Product> category : productList) {
+            for (Product p : category) {
+                System.out.println(p);
+            }
+            System.out.println("--------------------------------------------------------------------");
+        }
+    }
+    private static void printProductGroups(){
+        System.out.println("\nGROUPS:\n----------------------------");
+        for(int i=0;i<productGroup.length;i++){
+            System.out.printf("%-3s %-13s%n",(i+1)+".",productGroup[i]);
+        }
+        System.out.println("----------------------------");
+    }
+    private static void printProductCategory(int userChoice){
+        System.out.println("\nCATEGORIES:");
+        System.out.println("----------------------------");
+        if(userChoice == 1){
+            for(int i=0;i<4;i++){
+                System.out.printf("%-3s %-17s%n",(i+1)+".",categories[i]);
+            }
+        }else{
+            for(int i=4;i< categories.length;i++){
+                System.out.printf("%-3s %-17s%n",(i-3)+".",categories[i]);
+            }
+        }
+
+        System.out.println("----------------------------");
+    }
+    private static void printProducts(){
+
+        System.out.println("\nAVAILABLE PRODUCTS:");
         System.out.println("------------------------------------------------------------------------");
         for(int i=0;i< matchingProducts.size();i++){
             System.out.printf("%-3s %s%n",(i+1)+".",matchingProducts.get(i));
         }
         System.out.println("------------------------------------------------------------------------");
     }
+    private static void printChosenProduct(){
+
+        int productChoice = getProductChoice();
+
+        if(productChoice>0){
+
+            Product chosenProduct = matchingProducts.get(productChoice-1);
+
+            System.out.println("\nCHOSEN PRODUCT:\n--------------------------------------------------------------------");
+            System.out.println(chosenProduct);
+            System.out.println("--------------------------------------------------------------------");
+            calculatePrice(chosenProduct);
+        }
+
+    }
+
     private static void calculatePrice(Product chosenProduct){
 
         double productWeight=0;
