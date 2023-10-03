@@ -15,9 +15,9 @@ public class Main {
     public static boolean menuLoop = true;
 
     public static String[] productGroup;
-    public static String[] categories;
+    public static String[] productCategory;
     public static ArrayList<Product>[] productList = new ArrayList[10];
-    public static ArrayList<Product> matchingProducts = new ArrayList<Product>();
+    public static ArrayList<Product> tempProductList = new ArrayList<Product>();
 
     public static void main(String[] args) {
         System.out.println("Welcome to the Fruit & Vegetable Scale!");
@@ -29,7 +29,7 @@ public class Main {
 
         productGroup = new String[]{"Fruit","Vegetables"};
 
-        categories = new String[]{
+        productCategory = new String[]{
             "Citrus Fruit",
             "Apples",
             "Stone Fruit",
@@ -48,71 +48,71 @@ public class Main {
             productList[i] = new ArrayList<Product>();
         }
 
-        productList[0].add(new Product("Lemon", productGroup[0], categories[0],42.54));
-        productList[0].add(new Product("Lime", productGroup[0], categories[0],42.54));
-        productList[0].add(new Product("Orange", productGroup[0], categories[0],42.54));
-        productList[0].add(new Product("Satsuma", productGroup[0], categories[0],42.54));
-        productList[0].add(new Product("Grapefruit", productGroup[0], categories[0],42.54));
-        productList[0].add(new Product("Clementine", productGroup[0], categories[0],42.54));
+        productList[0].add(new Product("Lemon", productGroup[0], productCategory[0],42.54));
+        productList[0].add(new Product("Lime", productGroup[0], productCategory[0],42.54));
+        productList[0].add(new Product("Orange", productGroup[0], productCategory[0],42.54));
+        productList[0].add(new Product("Satsuma", productGroup[0], productCategory[0],42.54));
+        productList[0].add(new Product("Grapefruit", productGroup[0], productCategory[0],42.54));
+        productList[0].add(new Product("Clementine", productGroup[0], productCategory[0],42.54));
 
-        productList[1].add(new Product("Granny Smith Apple", productGroup[0], categories[1],42.54));
-        productList[1].add(new Product("Pink Lady Apple", productGroup[0], categories[1],42.54));
-        productList[1].add(new Product("Royal Gala Apple", productGroup[0], categories[1],42.54));
+        productList[1].add(new Product("Granny Smith Apple", productGroup[0], productCategory[1],42.54));
+        productList[1].add(new Product("Pink Lady Apple", productGroup[0], productCategory[1],42.54));
+        productList[1].add(new Product("Royal Gala Apple", productGroup[0], productCategory[1],42.54));
 
-        productList[2].add(new Product("Peach", productGroup[0], categories[2],42.54));
-        productList[2].add(new Product("Nectarine", productGroup[0], categories[2],42.54));
-        productList[2].add(new Product("Apricot", productGroup[0], categories[2],42.54));
-        productList[2].add(new Product("Plum", productGroup[0], categories[2],42.54));
+        productList[2].add(new Product("Peach", productGroup[0], productCategory[2],42.54));
+        productList[2].add(new Product("Nectarine", productGroup[0], productCategory[2],42.54));
+        productList[2].add(new Product("Apricot", productGroup[0], productCategory[2],42.54));
+        productList[2].add(new Product("Plum", productGroup[0], productCategory[2],42.54));
 
-        productList[3].add(new Product("Banana", productGroup[0], categories[3],42.54));
-        productList[3].add(new Product("Banana ECO", productGroup[0], categories[3],42.54));
-        productList[3].add(new Product("Watermelon", productGroup[0], categories[3],42.54));
-        productList[3].add(new Product("Cantaloupe", productGroup[0], categories[3],42.54));
-        productList[3].add(new Product("Honey Melon", productGroup[0], categories[3],42.54));
-        productList[3].add(new Product("Pear", productGroup[0], categories[3],42.54));
+        productList[3].add(new Product("Banana", productGroup[0], productCategory[3],42.54));
+        productList[3].add(new Product("Banana ECO", productGroup[0], productCategory[3],42.54));
+        productList[3].add(new Product("Watermelon", productGroup[0], productCategory[3],42.54));
+        productList[3].add(new Product("Cantaloupe", productGroup[0], productCategory[3],42.54));
+        productList[3].add(new Product("Honey Melon", productGroup[0], productCategory[3],42.54));
+        productList[3].add(new Product("Pear", productGroup[0], productCategory[3],42.54));
 
-        productList[4].add(new Product("Carrot", productGroup[1], categories[4],42.54));
-        productList[4].add(new Product("Parsnip", productGroup[1], categories[4],42.54));
-        productList[4].add(new Product("Potato", productGroup[1], categories[4],142.54));
-        productList[4].add(new Product("Sweet Potato", productGroup[1], categories[4],142.54));
-        productList[4].add(new Product("Horseradish", productGroup[1], categories[4],142.54));
-        productList[4].add(new Product("Beetroot", productGroup[1], categories[4],142.54));
-        productList[4].add(new Product("Swedish Turnip", productGroup[1], categories[4],42.54));
+        productList[4].add(new Product("Carrot", productGroup[1], productCategory[4],42.54));
+        productList[4].add(new Product("Parsnip", productGroup[1], productCategory[4],42.54));
+        productList[4].add(new Product("Potato", productGroup[1], productCategory[4],142.54));
+        productList[4].add(new Product("Sweet Potato", productGroup[1], productCategory[4],142.54));
+        productList[4].add(new Product("Horseradish", productGroup[1], productCategory[4],142.54));
+        productList[4].add(new Product("Beetroot", productGroup[1], productCategory[4],142.54));
+        productList[4].add(new Product("Swedish Turnip", productGroup[1], productCategory[4],42.54));
 
-        productList[5].add(new Product("Yellow Onion",productGroup[1], categories[5],42.54));
-        productList[5].add(new Product("Red Onion", productGroup[1], categories[5],42.54));
-        productList[5].add(new Product("White Onion", productGroup[1], categories[5],42.54));
-        productList[5].add(new Product("Garlic", productGroup[1], categories[5],42.54));
-        productList[5].add(new Product("Shallot", productGroup[1], categories[5],42.54));
-        productList[5].add(new Product("Leek", productGroup[1], categories[5],42.54));
-        productList[5].add(new Product("Green Onion", productGroup[1], categories[5],42.54));
+        productList[5].add(new Product("Yellow Onion",productGroup[1], productCategory[5],42.54));
+        productList[5].add(new Product("Red Onion", productGroup[1], productCategory[5],42.54));
+        productList[5].add(new Product("White Onion", productGroup[1], productCategory[5],42.54));
+        productList[5].add(new Product("Garlic", productGroup[1], productCategory[5],42.54));
+        productList[5].add(new Product("Shallot", productGroup[1], productCategory[5],42.54));
+        productList[5].add(new Product("Leek", productGroup[1], productCategory[5],42.54));
+        productList[5].add(new Product("Green Onion", productGroup[1], productCategory[5],42.54));
 
-        productList[6].add(new Product("Chanterelle", productGroup[1], categories[6],42.54));
-        productList[6].add(new Product("Champignon", productGroup[1], categories[6],42.54));
-        productList[6].add(new Product("Porcini", productGroup[1], categories[6],42.54));
-        productList[6].add(new Product("Portabello", productGroup[1], categories[6],42.54));
-        productList[6].add(new Product("Shiitake", productGroup[1], categories[6],42.54));
+        productList[6].add(new Product("Chanterelle", productGroup[1], productCategory[6],42.54));
+        productList[6].add(new Product("Champignon", productGroup[1], productCategory[6],42.54));
+        productList[6].add(new Product("Porcini", productGroup[1], productCategory[6],42.54));
+        productList[6].add(new Product("Portabello", productGroup[1], productCategory[6],42.54));
+        productList[6].add(new Product("Shiitake", productGroup[1], productCategory[6],42.54));
 
-        productList[7].add(new Product("Red Bell Pepper", productGroup[1], categories[7],42.54));
-        productList[7].add(new Product("Yellow Bell Pepper", productGroup[1], categories[7],42.54));
-        productList[7].add(new Product("Green Bell Pepper", productGroup[1], categories[7],42.54));
-        productList[7].add(new Product("Red Chili", productGroup[1], categories[7],42.54));
-        productList[7].add(new Product("Jalapeno", productGroup[1], categories[7],42.54));
-        productList[7].add(new Product("Habanero", productGroup[1], categories[7],42.54));
+        productList[7].add(new Product("Red Bell Pepper", productGroup[1], productCategory[7],42.54));
+        productList[7].add(new Product("Yellow Bell Pepper", productGroup[1], productCategory[7],42.54));
+        productList[7].add(new Product("Green Bell Pepper", productGroup[1], productCategory[7],42.54));
+        productList[7].add(new Product("Red Chili", productGroup[1], productCategory[7],42.54));
+        productList[7].add(new Product("Jalapeno", productGroup[1], productCategory[7],42.54));
+        productList[7].add(new Product("Habanero", productGroup[1], productCategory[7],42.54));
 
-        productList[8].add(new Product("Brussels Sprouts", productGroup[1], categories[8],42.54));
-        productList[8].add(new Product("Broccoli", productGroup[1], categories[8],42.54));
-        productList[8].add(new Product("Turnip", productGroup[1], categories[8],42.54));
-        productList[8].add(new Product("Cauliflower", productGroup[1], categories[8],42.54));
-        productList[8].add(new Product("Cabbage", productGroup[1], categories[8],42.54));
-        productList[8].add(new Product("Red Cabbage", productGroup[1], categories[8],42.54));
-        productList[8].add(new Product("Kale", productGroup[1], categories[8],42.54));
+        productList[8].add(new Product("Brussels Sprouts", productGroup[1], productCategory[8],42.54));
+        productList[8].add(new Product("Broccoli", productGroup[1], productCategory[8],42.54));
+        productList[8].add(new Product("Turnip", productGroup[1], productCategory[8],42.54));
+        productList[8].add(new Product("Cauliflower", productGroup[1], productCategory[8],42.54));
+        productList[8].add(new Product("Cabbage", productGroup[1], productCategory[8],42.54));
+        productList[8].add(new Product("Red Cabbage", productGroup[1], productCategory[8],42.54));
+        productList[8].add(new Product("Kale", productGroup[1], productCategory[8],42.54));
 
-        productList[9].add(new Product("Ginger", productGroup[1], categories[9],42.54));
-        productList[9].add(new Product("Cucumber", productGroup[1], categories[9],42.54));
-        productList[9].add(new Product("Tomato", productGroup[1], categories[9],42.54));
-        productList[9].add(new Product("Asparagus", productGroup[1], categories[9],42.54));
-        productList[9].add(new Product("Radish", productGroup[1], categories[9],42.54));
+        productList[9].add(new Product("Ginger", productGroup[1], productCategory[9],42.54));
+        productList[9].add(new Product("Cucumber", productGroup[1], productCategory[9],42.54));
+        productList[9].add(new Product("Tomato", productGroup[1], productCategory[9],42.54));
+        productList[9].add(new Product("Asparagus", productGroup[1], productCategory[9],42.54));
+        productList[9].add(new Product("Radish", productGroup[1], productCategory[9],42.54));
 
     }
 
@@ -169,10 +169,15 @@ public class Main {
                 return;
             }
             findMatchingProduct(productName);
-        } while (matchingProducts.isEmpty());
+        } while (tempProductList.isEmpty());
 
-        printChosenProduct();
-        matchingProducts.clear();
+        Product chosenProduct = printChosenProduct();
+
+        if(chosenProduct != null){
+            calculatePrice(chosenProduct);
+        }
+
+        tempProductList.clear();
     }
 
     private static void navigateToProduct(){
@@ -197,7 +202,7 @@ public class Main {
 
             int fruitIndex = userCategoryChoice-1; // Grabs Fruit Objects from productList[0-3]
             for(Product p : productList[fruitIndex]){
-                matchingProducts.add(p);
+                tempProductList.add(p);
             }
 
         }else if(userGroupChoice == 2){
@@ -211,32 +216,62 @@ public class Main {
 
             int vegetableIndex = userCategoryChoice+3; // Grabs Vegetable Objects from productList[4-9]
             for(Product p : productList[vegetableIndex]){
-                matchingProducts.add(p);
+                tempProductList.add(p);
             }
         }
 
-        printChosenProduct();
-        matchingProducts.clear();
+        Product chosenProduct = printChosenProduct();
 
+        if(chosenProduct != null){
+            calculatePrice(chosenProduct);
+        }
+
+        tempProductList.clear();
     }
     
     private static void addProduct(){
-        System.out.println("\nPRODUCT REGISTRATION\nEnter the name of the product you wish to register. \"0\" to return to main menu.");
-        System.out.print("\nProduct name: ");
-        String productName = input.nextLine().toLowerCase();
+        String productName;
+        int group;
+        int category;
+        double productPrice;
+        boolean alreadyExists;
+
+        do{
+            System.out.println("\nPRODUCT REGISTRATION\nEnter the name of the product you wish to register. \"0\" to return to main menu.");
+            System.out.print("\nProduct name: ");
+
+            productName = input.nextLine().toLowerCase();
+            alreadyExists = false;
+
+            for(ArrayList<Product> list : productList){
+                for(Product p : list){
+                    if(productName.equalsIgnoreCase(p.getName())){
+                        System.out.println("\nA product with that name already exists. Try again.");
+                        alreadyExists = true;
+                        break;
+                    }
+                }
+                if(alreadyExists){
+                    break;
+                }
+            }
+        }while(alreadyExists);
+
+
         if(returnToMenu(productName)){
             System.out.println("\nReturning to main...");
             return;
         }
         productName = Character.toUpperCase(productName.charAt(0))+productName.substring(1); // Capitalizes name
 
-        int group = getGroupChoice();
+        group = getGroupChoice();
         if(returnToMenu(group)){
             System.out.println("\nReturning to main...");
             return;
         }
 
-        int category = 0;
+        category = 0;
+
         if(group == 1){
             category = getCategoryChoice(group,1,4);
 
@@ -244,7 +279,8 @@ public class Main {
                 System.out.println("\nReturning to main...");
                 return;
             }
-            category-=1;
+            group-=1;
+            category-=1; // changes it match selected index in productList[]
 
         }else if(group == 2){
             category = getCategoryChoice(group,1,6);
@@ -253,16 +289,17 @@ public class Main {
                 System.out.println("\nReturning to main...");
                 return;
             }
-            category += 3;
+            group-=1;
+            category += 3; // changes it match selected index in productList[]
         }
 
-        double productPrice = 0;
+        productPrice = 0;
 
         do{
             System.out.println("\nEnter price in kr/kg for the product. \"0\" to return to main menu.");
 
             try{
-                productPrice = input.useLocale(Locale.US).nextDouble();
+                productPrice = input.useLocale(Locale.ENGLISH).nextDouble();
 
                 if(returnToMenu(productPrice)){
                     System.out.println("\nReturning to main...");
@@ -278,28 +315,53 @@ public class Main {
                     You are using US decimal point. (E.g. "1.5")""");
                 input.nextLine();
             }
-        }while(productPrice == 0.0 || productPrice<0);
+        }while(productPrice <= 0);
 
-        productList[category].add(new Product(productName,productGroup[group-1],categories[category],productPrice));
+        productList[category].add(new Product(productName,productGroup[group], productCategory[category],productPrice));
         System.out.println(productName+" has been registered!");
 
     }
     private static void removeProduct(){
-        System.out.println("\nRemoving product");
+        do {
+            System.out.println("\nPRODUCT REMOVAL\nEnter the name of the product you wish to remove. \"0\" to return to main menu.");
+            System.out.print("\nProduct name: ");
+            String productName = input.nextLine().toLowerCase();
+
+            if (returnToMenu(productName)) {
+                System.out.println("\nReturning to menu...");
+                return;
+            }
+            findMatchingProduct(productName);
+        } while (tempProductList.isEmpty());
+
+        Product chosenProduct = printChosenProduct();
+
+        if(chosenProduct != null){
+            for(int i=0;i<productList.length;i++){
+                for(int j=0;j<productList[i].size();j++){
+                    if(productList[i].get(j).getName().equalsIgnoreCase(chosenProduct.getName())){
+                        productList[i].remove(j);
+                    }
+                }
+            }
+            System.out.println("\n"+chosenProduct.getName()+" has been removed!");
+        }
+
+        tempProductList.clear();
     }
     private static void updateProduct(){
-        System.out.println("\nUpdating product");
+
     }
     private static void findMatchingProduct(String productName){
 
         for(ArrayList<Product> category : productList){
             for(Product p : category){
                 if(p.getName().equalsIgnoreCase(productName) || p.getName().toLowerCase().contains(productName)){
-                    matchingProducts.add(p);
+                    tempProductList.add(p);
                 }
             }
         }
-        if(matchingProducts.isEmpty()){
+        if(tempProductList.isEmpty()){
             System.out.println("\nNo product found. Try again.");
         }
     }
@@ -332,7 +394,7 @@ public class Main {
 
         return userChoice;
     }
-    private static int getCategoryChoice(int userGroupChoice, int choiceMin, int choiceMax){
+    private static int getCategoryChoice(int userGroupChoice, int firstElement, int lastElement){
 
         int userCategoryChoice=0;
 
@@ -350,7 +412,7 @@ public class Main {
                     return 0;
                 }
 
-                if(userCategoryChoice < choiceMin || userCategoryChoice > choiceMax){
+                if(userCategoryChoice < firstElement || userCategoryChoice > lastElement){
                     System.out.println("\nThat category does not exist. Try again.");
                 }
 
@@ -358,7 +420,7 @@ public class Main {
                 System.out.println("\nInvalid input. Try again.");
                 input.nextLine();
             }
-        }while(userCategoryChoice < choiceMin || userCategoryChoice > choiceMax);
+        }while(userCategoryChoice < firstElement || userCategoryChoice > lastElement);
 
         return userCategoryChoice;
     }
@@ -378,7 +440,7 @@ public class Main {
                     return 0;
                 }
 
-                if(productChoice <1 || productChoice >matchingProducts.size()){
+                if(productChoice <1 || productChoice > tempProductList.size()){
                     System.out.println("\nThat option does not exist. Try again.");
                 }
 
@@ -387,7 +449,7 @@ public class Main {
                 input.nextLine();
             }
 
-        }while(productChoice <1 || productChoice >matchingProducts.size());
+        }while(productChoice <1 || productChoice > tempProductList.size());
 
         return productChoice;
     }
@@ -416,11 +478,11 @@ public class Main {
         System.out.println("----------------------------");
         if(userChoice == 1){
             for(int i=0;i<4;i++){
-                System.out.printf("%-3s %-17s%n",(i+1)+".",categories[i]);
+                System.out.printf("%-3s %-17s%n",(i+1)+".", productCategory[i]);
             }
         }else{
-            for(int i=4;i< categories.length;i++){
-                System.out.printf("%-3s %-17s%n",(i-3)+".",categories[i]);
+            for(int i = 4; i< productCategory.length; i++){
+                System.out.printf("%-3s %-17s%n",(i-3)+".", productCategory[i]);
             }
         }
 
@@ -430,25 +492,26 @@ public class Main {
 
         System.out.println("\nAVAILABLE PRODUCTS:");
         System.out.println("------------------------------------------------------------------------");
-        for(int i=0;i< matchingProducts.size();i++){
-            System.out.printf("%-3s %s%n",(i+1)+".",matchingProducts.get(i));
+        for(int i = 0; i< tempProductList.size(); i++){
+            System.out.printf("%-3s %s%n",(i+1)+".", tempProductList.get(i));
         }
         System.out.println("------------------------------------------------------------------------");
     }
-    private static void printChosenProduct(){
+    private static Product printChosenProduct(){
 
         int productChoice = getProductChoice();
 
         if(productChoice>0){
 
-            Product chosenProduct = matchingProducts.get(productChoice-1);
+            Product chosenProduct = tempProductList.get(productChoice-1);
 
             System.out.println("\nCHOSEN PRODUCT:\n--------------------------------------------------------------------");
             System.out.println(chosenProduct);
             System.out.println("--------------------------------------------------------------------");
-            calculatePrice(chosenProduct);
-        }
+            return chosenProduct;
 
+        }
+        return null;
     }
 
     private static void calculatePrice(Product chosenProduct){
@@ -457,7 +520,7 @@ public class Main {
         do{
             System.out.print("\nEnter product weight in kilograms. \"0\" to return to main menu.\nWeight: ");
             try{
-                productWeight = input.useLocale(Locale.US).nextDouble();
+                productWeight = input.useLocale(Locale.ENGLISH).nextDouble();
                 input.nextLine();
                 if(returnToMenu(productWeight)){
                     System.out.println("\nReturning to menu...");

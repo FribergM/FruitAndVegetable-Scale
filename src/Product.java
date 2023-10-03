@@ -1,3 +1,5 @@
+import java.util.Locale;
+
 /**
  * Name: Måns Friberg
  * Email: mans.friberg@iths.se
@@ -57,7 +59,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return String.format("%-20s| %-13s| %-17s| %7.2fkr/kg",name,productGroup,productCategory,price);
+        return String.format(Locale.ENGLISH,"%-20s| %-13s| %-17s| %7.2fkr/kg",name,productGroup,productCategory,price);
 
     }
 }
