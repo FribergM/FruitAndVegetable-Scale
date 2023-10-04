@@ -126,8 +126,7 @@ public class Main {
                 2. Navigate to product
                 3. Add a product
                 4. Remove a product
-                5. Update a product
-                6. Print all products
+                5. Print all products
                 0. Exit program
                 ----------------------------""");
 
@@ -141,8 +140,7 @@ public class Main {
                     case 2 -> navigateToProduct();
                     case 3 -> addProduct();
                     case 4 -> removeProduct();
-                    case 5 -> updateProduct();
-                    case 6 -> printAllProducts();
+                    case 5 -> printAllProducts();
                     case 0 -> {
                         System.out.println("\nExiting program...");
                         menuLoop = false;
@@ -179,7 +177,6 @@ public class Main {
 
         tempProductList.clear();
     }
-
     private static void navigateToProduct(){
 
         System.out.print("\nPRODUCT NAVIGATION");
@@ -228,7 +225,6 @@ public class Main {
 
         tempProductList.clear();
     }
-    
     private static void addProduct(){
         String productName;
         int group;
@@ -243,7 +239,7 @@ public class Main {
             productName = input.nextLine().toLowerCase();
             alreadyExists = false;
 
-            for(ArrayList<Product> list : productList){
+            for(ArrayList<Product> list : productList){ //Checks if product already exists
                 for(Product p : list){
                     if(productName.equalsIgnoreCase(p.getName())){
                         System.out.println("\nA product with that name already exists. Try again.");
@@ -349,9 +345,7 @@ public class Main {
 
         tempProductList.clear();
     }
-    private static void updateProduct(){
 
-    }
     private static void findMatchingProduct(String productName){
 
         for(ArrayList<Product> category : productList){
