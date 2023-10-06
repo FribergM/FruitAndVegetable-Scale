@@ -9,7 +9,7 @@ public class Product {
     private String name;
     private String productGroup;
     private String productCategory;
-    private double price;
+    private double pricePerKg;
 
     public Product(String name){
         this.name = name;
@@ -23,11 +23,11 @@ public class Product {
         this.productGroup = productGroup;
         this.productCategory = productCategory;
     }
-    public Product(String name, String productGroup, String productCategory, double price){
+    public Product(String name, String productGroup, String productCategory, double pricePerKg){
         this.name = name;
         this.productGroup = productGroup;
         this.productCategory = productCategory;
-        this.price = price;
+        this.pricePerKg = pricePerKg;
     }
 
     public String getName(){
@@ -39,8 +39,8 @@ public class Product {
     public String getProductCategory(){
         return this.productCategory;
     }
-    public double getPrice(){
-        return this.price;
+    public double getPricePerKg(){
+        return this.pricePerKg;
     }
     public void setName(String name){
         this.name = name;
@@ -51,12 +51,12 @@ public class Product {
     public void setProductCategory(String productCategory){
         this.productCategory = productCategory;
     }
-    public void setPrice(double price){
-        this.price = price;
+    public void setPricePerKg(double pricePerKg){
+        this.pricePerKg = pricePerKg;
     }
 
     @Override
     public String toString() {
-        return String.format(Locale.ENGLISH,"%-20s| %-13s| %-17s| %7.2fkr/kg",name,productGroup,productCategory,price);
+        return String.format(Locale.ENGLISH,"%-20s| %-13s| %-17s| %7.2fkr/kg",name,productGroup,productCategory, pricePerKg);
     }
 }

@@ -123,12 +123,12 @@ public class Main {
                 
                 Please choose a menu option!
                 ----------------------------
-                1. Search for product
-                2. Navigate to product
-                3. Add a product
-                4. Remove a product
-                5. Show all products
-                0. Exit program
+                | 1. Search for product    |
+                | 2. Navigate to product   |
+                | 3. Add a product         |
+                | 4. Remove a product      |
+                | 5. Show all products     |
+                | 0. Exit program          |
                 ----------------------------""");
 
             try {
@@ -140,7 +140,7 @@ public class Main {
                     case 2 -> navigateToProduct();
                     case 3 -> addProduct();
                     case 4 -> removeProduct();
-                    case 5 -> printAllProducts();
+                    case 5 -> showAllProducts();
                     case 0 -> System.out.println("\nExiting program...");
 
                     default -> System.out.println("\nInvalid input. Try again.");
@@ -174,9 +174,7 @@ public class Main {
             return;
         }
 
-        printChosenProduct(chosenProduct);
         calculatePrice(chosenProduct);
-
 
         tempProductList.clear();
     }
@@ -220,9 +218,7 @@ public class Main {
             return;
         }
 
-        printChosenProduct(chosenProduct);
         calculatePrice(chosenProduct);
-
 
         tempProductList.clear();
     }
@@ -344,18 +340,18 @@ public class Main {
 
         tempProductList.clear();
     }
-
-    private static boolean checkIfProductExists(String productName){
-        for(ArrayList<Product> list : productList){
-            for(Product p : list){
-                if(productName.equalsIgnoreCase(p.getName())){
-                    System.out.println("\nA product with that name already exists. Try again.");
-                    return false;
-                }
+    private static void showAllProducts(){
+        System.out.println("------------------------------------------------------------------------");
+        System.out.printf("| %-20s| %-13s| %-17s| %-12s |%n","Product","Group","Category","Price");
+        System.out.println("------------------------------------------------------------------------");
+        for (ArrayList<Product> category : productList) {
+            for (Product p : category) {
+                System.out.printf("%c %s %c%n",'|',p,'|');
             }
+            System.out.println("------------------------------------------------------------------------");
         }
-        return true;
     }
+
     private static void findMatchingProduct(String productName){
 
         for(ArrayList<Product> category : productList){
@@ -369,6 +365,18 @@ public class Main {
             System.out.println("\nNo product found. Try again.");
         }
     }
+    private static boolean checkIfProductExists(String productName){
+        for(ArrayList<Product> list : productList){
+            for(Product p : list){
+                if(productName.equalsIgnoreCase(p.getName())){
+                    System.out.println("\nA product with that name already exists. Try again.");
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     private static int getGroupChoice(){
         int userChoice = 0;
 
@@ -379,8 +387,7 @@ public class Main {
 
             try{
                 System.out.print("Your choice: ");
-                userChoice = input.nextInt();
-                input.nextLine();
+                userChoice = input.nextInt(); input.nextLine();
 
                 if(returnToMenu(userChoice)){
                     return 0;
@@ -437,8 +444,7 @@ public class Main {
 
             try{
                 System.out.print("Your choice: ");
-                productChoice = input.nextInt();
-                input.nextLine();
+                productChoice = input.nextInt(); input.nextLine();
 
                 if(returnToMenu(productChoice)){
                     return null;
@@ -455,21 +461,9 @@ public class Main {
 
         }while(productChoice <1 || productChoice > tempProductList.size());
 
-        return tempProductList.get(productChoice-1);
+        return tempProductList.get(productChoice-1); // -1 to get the matching index of desired choice.
     }
 
-    private static void printAllProducts(){
-        //TODO Figure out of you need this..
-        System.out.println("------------------------------------------------------------------------");
-        System.out.printf("| %-20s| %-13s| %-17s| %-12s |%n","Product","Group","Category","Price");
-        System.out.println("------------------------------------------------------------------------");
-        for (ArrayList<Product> category : productList) {
-            for (Product p : category) {
-                System.out.printf("%c %s %c%n",'|',p,'|');
-            }
-            System.out.println("------------------------------------------------------------------------");
-        }
-    }
     private static void printProductGroups(){
         System.out.println("\nGROUPS:\n-------------------------");
         for(int i=0;i<productGroup.length;i++){
@@ -477,10 +471,10 @@ public class Main {
         }
         System.out.println("-------------------------");
     }
-    private static void printProductCategory(int userChoice){
+    private static void printProductCategory(int userGroupChoice){
         System.out.println("\nCATEGORIES:");
         System.out.println("-------------------------");
-        if(userChoice == 1){
+        if(userGroupChoice == 1){
             for(int i=0;i<4;i++){
                 System.out.printf("| %-3s %-17s |%n",(i+1)+".", productCategory[i]);
             }
@@ -511,13 +505,17 @@ public class Main {
         double productWeight=0;
 
         do{
+            printChosenProduct(chosenProduct);
+
             System.out.print("\nEnter product weight in kilograms. \"0\" to return to main menu.\nWeight: ");
             try{
                 productWeight = input.useLocale(Locale.ENGLISH).nextDouble(); input.nextLine();
+
                 if(returnToMenu(productWeight)){
                     System.out.println("\nReturning to menu...");
                     return;
                 }
+
             }catch(InputMismatchException e){
                 System.out.println("""
                 
@@ -529,7 +527,7 @@ public class Main {
             }
         }while(productWeight<=0);
 
-        double finalPrice = productWeight*chosenProduct.getPrice();
+        double finalPrice = productWeight*chosenProduct.getPricePerKg();
         System.out.println("\nThe price for "+productWeight+"kg "+chosenProduct.getName()+" is: ");
         System.out.printf(Locale.ENGLISH,"%.2fkr%n",finalPrice);
 
