@@ -14,12 +14,10 @@ public class Product {
     public Product(String name){
         this.name = name;
     }
-
     public Product(String name,String productGroup){
         this.name = name;
         this.productGroup = productGroup;
     }
-
     public Product(String name, String productGroup,String productCategory){
         this.name = name;
         this.productGroup = productGroup;
@@ -60,6 +58,5 @@ public class Product {
     @Override
     public String toString() {
         return String.format(Locale.ENGLISH,"%-20s| %-13s| %-17s| %7.2fkr/kg",name,productGroup,productCategory,price);
-
     }
 }
