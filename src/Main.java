@@ -115,7 +115,6 @@ public class Main {
 
 
     }
-
     private static void menu(){
         int menuChoice = -1;
         do{
@@ -167,7 +166,7 @@ public class Main {
 
             findMatchingProduct(productName);
 
-        } while (tempProductList.isEmpty());
+        }while(tempProductList.isEmpty());
 
         Product chosenProduct = getChosenProduct();
 
@@ -534,7 +533,7 @@ public class Main {
         }while(productWeight<=0);
 
         double finalPrice = productWeight*chosenProduct.getPricePerKg();
-        System.out.println("\nThe price for "+productWeight+"kg "+chosenProduct.getName()+" is: ");
+        System.out.println("\nThe price for "+productWeight+"kg '"+chosenProduct.getName()+"' is: ");
         System.out.printf(Locale.ENGLISH,"%.2fkr%n",finalPrice);
 
     }
