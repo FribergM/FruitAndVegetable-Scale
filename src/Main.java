@@ -117,11 +117,11 @@ public class Main {
     }
 
     private static void menu(){
-        int menuChoice=0;
+        int menuChoice = -1;
         do{
             System.out.println("""
                 
-                Please choose a menu option!
+                Please choose a menu option by number!
                 ----------------------------
                 | 1. Search for product    |
                 | 2. Navigate to product   |
@@ -143,7 +143,7 @@ public class Main {
                     case 5 -> showAllProducts();
                     case 0 -> System.out.println("\nExiting program...");
 
-                    default -> System.out.println("\nInvalid input. Try again.");
+                    default -> System.out.println("\nThat option does not exist. Try again.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("\nInvalid input. Try again.");
@@ -160,11 +160,13 @@ public class Main {
             System.out.print("\nProduct name: ");
             String productName = input.nextLine().toLowerCase();
 
-            if (returnToMenu(productName)) {
+            if(returnToMenu(productName)) {
                 System.out.println("\nReturning to menu...");
                 return;
             }
+
             findMatchingProduct(productName);
+
         } while (tempProductList.isEmpty());
 
         Product chosenProduct = getChosenProduct();
@@ -201,6 +203,7 @@ public class Main {
             System.out.println("\nReturning to menu...");
             return;
         }
+
         if(userGroupChoice == 1){
             userCategoryChoice -= 1;// Changes it to match the desired index for productList[0/1/2/3]
         }else{
@@ -329,7 +332,7 @@ public class Main {
 
         printChosenProduct(chosenProduct);
 
-        for(int i=0;i<productList.length;i++){
+        for(int i=0;i<productList.length;i++){ // Removes the chosen product.
             for(int j=0;j<productList[i].size();j++){
                 if(productList[i].get(j).getName().equalsIgnoreCase(chosenProduct.getName())){
                     productList[i].remove(j);
@@ -354,7 +357,7 @@ public class Main {
 
     private static void findMatchingProduct(String productName){
 
-        for(ArrayList<Product> category : productList){
+        for(ArrayList<Product> category : productList){ // Adds all products containing the user input into tempProductList.
             for(Product p : category){
                 if(p.getName().toLowerCase().contains(productName)){
                     tempProductList.add(p);
@@ -366,6 +369,7 @@ public class Main {
         }
     }
     private static boolean checkIfProductExists(String productName){
+
         for(ArrayList<Product> list : productList){
             for(Product p : list){
                 if(productName.equalsIgnoreCase(p.getName())){
@@ -378,7 +382,8 @@ public class Main {
     }
 
     private static int getGroupChoice(){
-        int userChoice = 0;
+
+        int userGroupChoice = 0;
 
         do{
             System.out.println("\nChoose a product group by number. \"0\" to return to main menu.");
@@ -387,13 +392,13 @@ public class Main {
 
             try{
                 System.out.print("Your choice: ");
-                userChoice = input.nextInt(); input.nextLine();
+                userGroupChoice = input.nextInt(); input.nextLine();
 
-                if(returnToMenu(userChoice)){
+                if(returnToMenu(userGroupChoice)){
                     return 0;
                 }
 
-                if(userChoice <1 || userChoice >2){
+                if(userGroupChoice <1 || userGroupChoice >2){
                     System.out.println("\nThat category does not exist. Try again.");
                 }
 
@@ -401,9 +406,9 @@ public class Main {
                 System.out.println("\nInvalid input. Try again.");
                 input.nextLine();
             }
-        }while(userChoice < 1 || userChoice > 2);
+        }while(userGroupChoice < 1 || userGroupChoice > 2);
 
-        return userChoice;
+        return userGroupChoice;
     }
     private static int getCategoryChoice(int userGroupChoice, int firstElement, int lastElement){
 
@@ -435,6 +440,7 @@ public class Main {
         return userCategoryChoice;
     }
     private static Product getChosenProduct(){
+
         int productChoice=0;
 
         do{
