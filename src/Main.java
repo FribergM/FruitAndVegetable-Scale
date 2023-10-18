@@ -224,6 +224,7 @@ public class Main {
 
         tempProductList.clear();
     }
+
     private static void addProduct(){
         String productName;
         int group;
@@ -239,12 +240,8 @@ public class Main {
 
             isValidName = checkIfProductExists(productName);
 
-            if(!productName.matches("[A-ZÅÄÖa-zåäö0 ]+") || productName.contains("0") && productName.length() > 1){ // Checks to make sure it's a suitable product name
-                System.out.println("\nInvalid name. Please only use letters. Try again.");
-                isValidName = false;
-            }else if(productName.isBlank()){
-                System.out.println("\nInvalid name. Name cannot be left blank. Try again.");
-                isValidName = false;
+            if(isValidName){
+                isValidName = checkIfValidName(productName);
             }
         }while(!isValidName);
 
@@ -252,7 +249,7 @@ public class Main {
             System.out.println("\nReturning to main...");
             return;
         }
-        productName = Character.toUpperCase(productName.charAt(0))+productName.substring(1); // Capitalizes name
+        productName = capitalizeString(productName);
 
         group = getGroupChoice();
 
@@ -260,7 +257,6 @@ public class Main {
             System.out.println("\nReturning to main...");
             return;
         }
-
 
         category = 0;
         if(group == 1){
@@ -280,28 +276,14 @@ public class Main {
             category += 3;// Changes it to match the desired index for productList[4/5/6/7/8/9]
         }
 
-
-        productPrice = 0;
-
         do{
             System.out.println("\nEnter price in kr/kg for the product. \"0\" to return to main menu.");
 
-            try{
-                productPrice = input.useLocale(Locale.ENGLISH).nextDouble();
+            productPrice = checkIfValidDoubleInput();
 
-                if(returnToMenu(productPrice)){
-                    System.out.println("\nReturning to main...");
-                    return;
-                }
-
-            }catch(InputMismatchException e){
-                System.out.println("""
-                    
-                    Invalid input!
-                    Please make sure that:
-                    You are inputting a number.
-                    You are using US decimal point. (E.g. "1.5")""");
-                input.nextLine();
+            if(returnToMenu(productPrice)){
+                System.out.println("\nReturning to main...");
+                return;
             }
         }while(productPrice <= 0);
 
@@ -309,8 +291,9 @@ public class Main {
         System.out.println(productName+" has been registered!");
 
     }
+
     private static void removeProduct(){
-        do {
+        do{
             System.out.println("\nPRODUCT REMOVAL\nEnter the name of the product you wish to remove. \"0\" to return to main menu.");
             System.out.print("\nProduct name: ");
             String productName = input.nextLine().toLowerCase();
@@ -320,7 +303,7 @@ public class Main {
                 return;
             }
             findMatchingProduct(productName);
-        } while (tempProductList.isEmpty());
+        }while(tempProductList.isEmpty());
 
         Product chosenProduct = getChosenProduct();
 
@@ -380,88 +363,118 @@ public class Main {
         return true;
     }
 
+    private static int checkIfValidIntInput(String invalidChoice, int minValue, int maxValue){
+
+        int userChoice=-1; // Set to -1 to not accidentally return to menu if catch() is reached.
+
+        try{
+            System.out.print("Your choice: ");
+            userChoice = input.nextInt(); input.nextLine();
+
+            if(returnToMenu(userChoice)){
+                return 0;
+            }
+
+            if(userChoice <minValue || userChoice >maxValue){
+                System.out.println("\nThat "+invalidChoice+" does not exist. Try again.");
+            }
+
+        }catch(InputMismatchException e){
+            System.out.println("\nInvalid input. Try again.");
+            input.nextLine();
+        }
+        return userChoice;
+    }
+    private static double checkIfValidDoubleInput(){
+
+        double value =-1; // Set to -1 to not accidentally return to menu if catch() is reached.
+
+        try{
+            value = input.useLocale(Locale.ENGLISH).nextDouble();
+
+            if(returnToMenu(value)){
+                return 0.0;
+            }
+
+            if(value<0.0){
+                System.out.println("\nA negative value are not allowed. Try again");
+            }
+
+        }catch(InputMismatchException e){
+            System.out.println("""
+
+                Invalid input!
+                Please make sure that:
+                You are inputting a number.
+                You are using US decimal point. (E.g. "1.5")""");
+            input.nextLine();
+        }
+        return value;
+    }
+
+    private static boolean checkIfValidName(String name){
+        if(!name.matches("[A-ZÅÄÖa-zåäö0 ]+") || name.contains("0") && name.length() > 1){ // Checks to make sure it's a suitable product name
+            System.out.println("\nInvalid name. Please only use letters. Try again.");
+            return false;
+        }else if(name.isBlank()){
+            System.out.println("\nInvalid name. Name cannot be left blank. Try again.");
+            return false;
+        }
+        return true;
+    }
+
     private static int getGroupChoice(){
 
-        int userGroupChoice = 0;
+        int userGroupChoice;
 
         do{
             System.out.println("\nChoose a product group by number. \"0\" to return to main menu.");
 
             printProductGroups();
 
-            try{
-                System.out.print("Your choice: ");
-                userGroupChoice = input.nextInt(); input.nextLine();
+            userGroupChoice = checkIfValidIntInput("product group",1,2);
 
-                if(returnToMenu(userGroupChoice)){
-                    return 0;
-                }
-
-                if(userGroupChoice <1 || userGroupChoice >2){
-                    System.out.println("\nThat category does not exist. Try again.");
-                }
-
-            }catch(InputMismatchException e){
-                System.out.println("\nInvalid input. Try again.");
-                input.nextLine();
+            if(returnToMenu(userGroupChoice)){
+                return 0;
             }
+
         }while(userGroupChoice < 1 || userGroupChoice > 2);
 
         return userGroupChoice;
     }
     private static int getCategoryChoice(int userGroupChoice, int firstElement, int lastElement){
 
-        int userCategoryChoice=0;
+        int userCategoryChoice;
 
         do{
             System.out.println("\nChoose a category by number. \"0\" to return to main menu.");
 
             printProductCategory(userGroupChoice);
 
-            try{
-                System.out.print("Your choice: ");
-                userCategoryChoice = input.nextInt(); input.nextLine();
+            userCategoryChoice = checkIfValidIntInput("category",firstElement,lastElement);
 
-                if(returnToMenu(userCategoryChoice)){
-                    return 0;
-                }
-
-                if(userCategoryChoice < firstElement || userCategoryChoice > lastElement){
-                    System.out.println("\nThat category does not exist. Try again.");
-                }
-
-            }catch(InputMismatchException e){
-                System.out.println("\nInvalid input. Try again.");
-                input.nextLine();
+            if(returnToMenu(userCategoryChoice)){
+                return 0;
             }
+
         }while(userCategoryChoice < firstElement || userCategoryChoice > lastElement);
 
         return userCategoryChoice;
     }
+
     private static Product getChosenProduct(){
 
-        int productChoice=0;
+        int productChoice;
 
         do{
             System.out.println("\nChoose a product by number. \"0\" to return to main menu.");
 
             printProducts();
 
-            try{
-                System.out.print("Your choice: ");
-                productChoice = input.nextInt(); input.nextLine();
+            productChoice = checkIfValidIntInput("category",1, tempProductList.size());
 
-                if(returnToMenu(productChoice)){
-                    return null;
-                }
-
-                if(productChoice <1 || productChoice > tempProductList.size()){
-                    System.out.println("\nThat option does not exist. Try again.");
-                }
-
-            }catch(InputMismatchException e){
-                System.out.println("\nInvalid input. Try again.");
-                input.nextLine();
+            if(returnToMenu(productChoice)){
+                return null;
             }
 
         }while(productChoice <1 || productChoice > tempProductList.size());
@@ -506,6 +519,7 @@ public class Main {
         System.out.println("------------------------------------------------------------------------");
     }
 
+
     private static void calculatePrice(Product chosenProduct){
         double productWeight=0;
 
@@ -513,29 +527,23 @@ public class Main {
             printChosenProduct(chosenProduct);
 
             System.out.print("\nEnter product weight in kilograms. \"0\" to return to main menu.\nWeight: ");
-            try{
-                productWeight = input.useLocale(Locale.ENGLISH).nextDouble(); input.nextLine();
 
-                if(returnToMenu(productWeight)){
-                    System.out.println("\nReturning to menu...");
-                    return;
-                }
+            productWeight = checkIfValidDoubleInput();
 
-            }catch(InputMismatchException e){
-                System.out.println("""
-                
-                Invalid input. Try again.
-                Please make sure that:
-                You are inputting a number.
-                You are using US decimal point. (E.g. "1.5")""");
-                input.nextLine();
+            if(returnToMenu(productWeight)){
+                System.out.println("\nReturning to menu...");
+                return;
             }
+
         }while(productWeight<=0);
 
         double finalPrice = productWeight*chosenProduct.getPricePerKg();
         System.out.println("\nThe price for "+productWeight+"kg '"+chosenProduct.getName()+"' is: ");
         System.out.printf(Locale.ENGLISH,"%.2fkr%n",finalPrice);
 
+    }
+    private static String capitalizeString(String string){
+        return string.toUpperCase().charAt(0)+string.substring(1).toLowerCase();
     }
     private static boolean returnToMenu(String userInput){
         if(userInput.equals("0")){
