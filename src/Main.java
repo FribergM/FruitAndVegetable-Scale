@@ -317,11 +317,11 @@ public class Main {
         for(int i=0;i<productList.length;i++){ // Removes the chosen product.
             for(int j=0;j<productList[i].size();j++){
                 if(productList[i].get(j).getName().equalsIgnoreCase(chosenProduct.getName())){
+                    System.out.println("\n"+chosenProduct.getName()+" has been removed!");
                     productList[i].remove(j);
                 }
             }
         }
-        System.out.println("\nChosen product has been removed!");
 
         tempProductList.clear();
     }
@@ -331,7 +331,7 @@ public class Main {
         System.out.println("------------------------------------------------------------------------");
         for (ArrayList<Product> category : productList) {
             for (Product p : category) {
-                System.out.printf("%c %s %c%n",'|',p,'|');
+                System.out.printf("| %s |%n",p);
             }
             System.out.println("------------------------------------------------------------------------");
         }
@@ -483,7 +483,8 @@ public class Main {
     }
 
     private static void printProductGroups(){
-        System.out.println("\nGROUPS:\n-------------------------");
+        System.out.println("\nGROUPS:");
+        System.out.println("-------------------------");
         for(int i=0;i<productGroup.length;i++){
             System.out.printf("| %-3s %-17s |%n",(i+1)+".",productGroup[i]);
         }
@@ -514,7 +515,8 @@ public class Main {
     }
     private static void printChosenProduct(Product chosenProduct){
 
-        System.out.println("\nCHOSEN PRODUCT:\n------------------------------------------------------------------------");
+        System.out.println("\nCHOSEN PRODUCT:");
+        System.out.println("------------------------------------------------------------------------");
         System.out.printf("| %-3s |%n", chosenProduct);
         System.out.println("------------------------------------------------------------------------");
     }
