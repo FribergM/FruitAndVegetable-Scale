@@ -1,0 +1,5 @@
+Chanterelle,Vegetables,Mushrooms,199.0
+Champignon,Vegetables,Mushrooms,59.9
+Oyster Mushroom,Vegetables,Mushrooms,169.0
+Portabello,Vegetables,Mushrooms,99.0
+Shiitake,Vegetables,Mushrooms,199.0

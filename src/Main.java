@@ -1,3 +1,9 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Locale;
@@ -17,11 +23,115 @@ public class Main {
     public static String[] productCategory;
     public static ArrayList<Product>[] productList = new ArrayList[10];
     public static ArrayList<Product> tempProductList = new ArrayList<Product>();
+    public static ArrayList<Product> completeList = new ArrayList<>();
+    public static ArrayList<Product> completeList2 = new ArrayList<>();
 
     public static void main(String[] args) {
+
         System.out.println("Welcome to the Fruit & Vegetable Scale!");
+
         initializeProducts();
-        menu();
+        for(ArrayList<Product> arrayList : productList){
+            completeList.addAll(arrayList);
+        }
+//        menu();
+
+        createNewTextFile("products\\");
+//        readFromTextFile("products\\");
+        writeToTextFile("products\\");
+
+
+
+    }
+    private static void createNewTextFile(String fileName){
+        //TODO Change name
+        File folder = new File("products");
+        if(folder.mkdirs()){
+            System.out.println("Local product files created.");
+        }
+        for(String s : productCategory){
+            try{
+                File file = new File("products\\"+s+".txt");
+                file.createNewFile();
+
+            }catch(IOException e){
+                System.out.println("IO EXCEPTION");
+                e.printStackTrace();
+            }
+        }
+
+
+//        try{
+//            File file = new File(fileName+".txt");
+//            if(file.createNewFile()){
+//                System.out.println("Local product file created.");
+//            }
+//        }catch(IOException e){
+//            System.out.println("IO EXCEPTION");
+//            e.printStackTrace();
+//        }
+    }
+    private static void writeToTextFile(String fileName){
+        //TODO Change name
+//        clearFile(fileName);
+
+        for(String s : productCategory){
+            clearFile(fileName+s); //clears out matching productCategory file
+            for(Product p : completeList){
+                if(p.getProductCategory().equalsIgnoreCase(s)){
+
+                    File file = new File(fileName+s+".txt");
+                    try(BufferedWriter writer = new BufferedWriter(new FileWriter(file,true))){
+                        writer.write(p.toStringNonFormat()+"\n");
+                    }catch(IOException e){
+                        System.out.println("IO EXCEPTION");
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+//        for(Product p : completeList){
+//            File file = new File(fileName+".txt");
+//            try(BufferedWriter writer = new BufferedWriter(new FileWriter(file,true))){
+//                writer.write(p.toStringNonFormat()+"\n");
+//            }catch(IOException e){
+//                System.out.println("IO EXCEPTION");
+//                e.printStackTrace();
+//            }
+//        }
+        System.out.println("Product Data Stored Locally");
+
+    }
+    private static void clearFile(String fileName){
+
+        try(FileWriter clearFile = new FileWriter(fileName+".txt")){
+            // overwrites the file with nothing.
+        } catch(IOException e){
+            System.out.println("IO EXCEPTION");
+            e.printStackTrace();
+        }
+    }
+    private static void readFromTextFile(String fileName){
+        //TODO Change name
+//        try(BufferedReader reader = new BufferedReader(new FileReader(fileName+".txt"))){
+//            String line;
+//            while((line = reader.readLine()) != null){
+//                String[] part = line.split(",");
+//                String productName = part[0];
+//                String productGroup = part[1];
+//                String productCategory = part[2];
+//                double pricePerKg = Double.parseDouble(part[3]);
+//
+//                Product newProduct = new Product(productName,productGroup, productCategory,pricePerKg);
+//                completeList2.add(newProduct);
+//
+//            }
+//        }catch(IOException e){
+//            System.out.println("IO EXCEPTION");
+//            e.printStackTrace();
+//        }
+//
     }
 
     private static void initializeProducts() {
@@ -52,9 +162,9 @@ public class Main {
         productList[0].add(new Product("Grapefruit", productGroup[0], productCategory[0],31.75));
         productList[0].add(new Product("Clementine", productGroup[0], productCategory[0],31.75));
 
-        productList[1].add(new Product("Granny smith apple", productGroup[0], productCategory[1],39.90));
-        productList[1].add(new Product("Pink lady apple", productGroup[0], productCategory[1],42.90));
-        productList[1].add(new Product("Royal gala apple", productGroup[0], productCategory[1],36.90));
+        productList[1].add(new Product("Granny Smith Apple", productGroup[0], productCategory[1],39.90));
+        productList[1].add(new Product("Pink Lady Apple", productGroup[0], productCategory[1],42.90));
+        productList[1].add(new Product("Royal Gala Apple", productGroup[0], productCategory[1],36.90));
 
         productList[2].add(new Product("Peach", productGroup[0], productCategory[2],39.90));
         productList[2].add(new Product("Nectarine", productGroup[0], productCategory[2],39.90));
@@ -62,56 +172,56 @@ public class Main {
         productList[2].add(new Product("Plum", productGroup[0], productCategory[2],25.95));
 
         productList[3].add(new Product("Banana", productGroup[0], productCategory[3],23.90));
-        productList[3].add(new Product("Banana ECO", productGroup[0], productCategory[3],28.90));
+        productList[3].add(new Product("Banana Eco", productGroup[0], productCategory[3],28.90));
         productList[3].add(new Product("Watermelon", productGroup[0], productCategory[3],24.90));
         productList[3].add(new Product("Cantaloupe", productGroup[0], productCategory[3],49.90));
-        productList[3].add(new Product("Honey melon", productGroup[0], productCategory[3],29.90));
+        productList[3].add(new Product("Honey Melon", productGroup[0], productCategory[3],29.90));
         productList[3].add(new Product("Pear", productGroup[0], productCategory[3],36.90));
 
         productList[4].add(new Product("Carrot", productGroup[1], productCategory[4],15.90));
         productList[4].add(new Product("Parsnip", productGroup[1], productCategory[4],24.90));
         productList[4].add(new Product("Potato", productGroup[1], productCategory[4],15.90));
-        productList[4].add(new Product("Sweet potato", productGroup[1], productCategory[4],29.90));
+        productList[4].add(new Product("Sweet Potato", productGroup[1], productCategory[4],29.90));
         productList[4].add(new Product("Horseradish", productGroup[1], productCategory[4],129.00));
         productList[4].add(new Product("Beetroot", productGroup[1], productCategory[4],19.90));
-        productList[4].add(new Product("Swedish turnip", productGroup[1], productCategory[4],34.90));
+        productList[4].add(new Product("Swedish Turnip", productGroup[1], productCategory[4],34.90));
         productList[4].add(new Product("Radish", productGroup[1], productCategory[4],39.90));
 
-        productList[5].add(new Product("Yellow onion",productGroup[1], productCategory[5],19.90));
-        productList[5].add(new Product("Red onion", productGroup[1], productCategory[5],23.90));
-        productList[5].add(new Product("White onion", productGroup[1], productCategory[5],66.33));
+        productList[5].add(new Product("Yellow Onion",productGroup[1], productCategory[5],19.90));
+        productList[5].add(new Product("Red Onion", productGroup[1], productCategory[5],23.90));
+        productList[5].add(new Product("White Onion", productGroup[1], productCategory[5],66.33));
         productList[5].add(new Product("Garlic", productGroup[1], productCategory[5],69.90));
         productList[5].add(new Product("Shallot", productGroup[1], productCategory[5],44.90));
         productList[5].add(new Product("Leek", productGroup[1], productCategory[5],29.90));
-        productList[5].add(new Product("Green onion", productGroup[1], productCategory[5],19.90));
+        productList[5].add(new Product("Green Onion", productGroup[1], productCategory[5],19.90));
 
         productList[6].add(new Product("Chanterelle", productGroup[1], productCategory[6],199.00));
         productList[6].add(new Product("Champignon", productGroup[1], productCategory[6],59.90));
-        productList[6].add(new Product("Oyster mushroom", productGroup[1], productCategory[6],169.00));
+        productList[6].add(new Product("Oyster Mushroom", productGroup[1], productCategory[6],169.00));
         productList[6].add(new Product("Portabello", productGroup[1], productCategory[6],99.00));
         productList[6].add(new Product("Shiitake", productGroup[1], productCategory[6],199.00));
 
-        productList[7].add(new Product("Red bell pepper", productGroup[1], productCategory[7],44.90));
-        productList[7].add(new Product("Yellow bell pepper", productGroup[1], productCategory[7],44.90));
-        productList[7].add(new Product("Green bell pepper", productGroup[1], productCategory[7],44.90));
+        productList[7].add(new Product("Red bell Pepper", productGroup[1], productCategory[7],44.90));
+        productList[7].add(new Product("Yellow bell Pepper", productGroup[1], productCategory[7],44.90));
+        productList[7].add(new Product("Green bell Pepper", productGroup[1], productCategory[7],44.90));
         productList[7].add(new Product("Red chili", productGroup[1], productCategory[7],209.00));
         productList[7].add(new Product("Jalapeno", productGroup[1], productCategory[7],249.00));
         productList[7].add(new Product("Habanero", productGroup[1], productCategory[7],279.00));
 
-        productList[8].add(new Product("Brussels sprouts", productGroup[1], productCategory[8],39.90));
+        productList[8].add(new Product("Brussels Sprouts", productGroup[1], productCategory[8],39.90));
         productList[8].add(new Product("Broccoli", productGroup[1], productCategory[8],67.90));
         productList[8].add(new Product("Turnip", productGroup[1], productCategory[8],54.90));
         productList[8].add(new Product("Cauliflower", productGroup[1], productCategory[8],29.90));
         productList[8].add(new Product("Cabbage", productGroup[1], productCategory[8],19.90));
-        productList[8].add(new Product("Red cabbage", productGroup[1], productCategory[8],24.90));
+        productList[8].add(new Product("Red Cabbage", productGroup[1], productCategory[8],24.90));
         productList[8].add(new Product("Kale", productGroup[1], productCategory[8],95.90));
 
         productList[9].add(new Product("Ginger", productGroup[1], productCategory[9],99.90));
         productList[9].add(new Product("Cucumber", productGroup[1], productCategory[9],56.90));
         productList[9].add(new Product("Tomato", productGroup[1], productCategory[9],39.90));
-        productList[9].add(new Product("Cocktail tomato", productGroup[1], productCategory[9],107.60));
-        productList[9].add(new Product("Asparagus green", productGroup[1], productCategory[9],219.90));
-        productList[9].add(new Product("Asparagus white", productGroup[1], productCategory[9],139.90));
+        productList[9].add(new Product("Cocktail Tomato", productGroup[1], productCategory[9],107.60));
+        productList[9].add(new Product("Asparagus Green", productGroup[1], productCategory[9],219.90));
+        productList[9].add(new Product("Asparagus White", productGroup[1], productCategory[9],139.90));
 
 
     }
@@ -249,7 +359,7 @@ public class Main {
             System.out.println("\nReturning to main...");
             return;
         }
-        productName = capitalizeString(productName);
+        productName = capitalizeWordsOfString(productName);
 
         group = getGroupChoice();
 
@@ -287,10 +397,12 @@ public class Main {
             }
         }while(productPrice <= 0);
 
-        productList[category].add(new Product(productName,productGroup[group-1], productCategory[category],productPrice));
-        System.out.println(productName+" has been registered!");
+        completeList.add(new Product(productName,productGroup[group-1], productCategory[category],productPrice));
 
+//        productList[category].add(new Product(productName,productGroup[group-1], productCategory[category],productPrice));
+        System.out.println(productName+" has been registered!");
     }
+
 
     private static void removeProduct(){
         do{
@@ -314,14 +426,22 @@ public class Main {
 
         printChosenProduct(chosenProduct);
 
-        for(int i=0;i<productList.length;i++){ // Removes the chosen product.
-            for(int j=0;j<productList[i].size();j++){
-                if(productList[i].get(j).getName().equalsIgnoreCase(chosenProduct.getName())){
-                    System.out.println("\n"+chosenProduct.getName()+" has been removed!");
-                    productList[i].remove(j);
-                }
+        for(Product p : completeList){
+            if(p.getName().equalsIgnoreCase(chosenProduct.getName())){
+                System.out.println("\n"+chosenProduct.getName()+" has been removed!");
+                completeList.remove(p);
+                break;
             }
         }
+
+//        for(int i=0;i<productList.length;i++){ // Removes the chosen product.
+//            for(int j=0;j<productList[i].size();j++){
+//                if(productList[i].get(j).getName().equalsIgnoreCase(chosenProduct.getName())){
+//                    System.out.println("\n"+chosenProduct.getName()+" has been removed!");
+//                    productList[i].remove(j);
+//                }
+//            }
+//        }
 
         tempProductList.clear();
     }
@@ -329,16 +449,28 @@ public class Main {
         System.out.println("------------------------------------------------------------------------");
         System.out.printf("| %-20s| %-13s| %-17s| %-12s |%n","Product","Group","Category","Price");
         System.out.println("------------------------------------------------------------------------");
-        for (ArrayList<Product> category : productList) {
-            for (Product p : category) {
-                System.out.printf("| %s |%n",p);
+
+        for(int i=0;i<completeList.size()-1;i++){
+            System.out.printf("| %s |%n",completeList.get(i).toStringNonFormat());
+            if(!completeList.get(i).getProductCategory().equalsIgnoreCase(completeList.get(i+1).getProductCategory())){
+                System.out.println("------------------------------------------------------------------------");
             }
-            System.out.println("------------------------------------------------------------------------");
         }
+        System.out.println("------------------------------------------------------------------------");
+//        for(ArrayList<Product> category : productList){
+//            for(Product p : category){
+//                System.out.printf("| %s |%n",p);
+//            }
+//            System.out.println("------------------------------------------------------------------------");
+//        }
     }
 
     private static void findMatchingProduct(String productName){
-
+//        for(Product p : completeList){ // Adds all products containing the user input into tempProductList.
+//            if(p.getName().toLowerCase().contains(productName)){
+//                tempProductList.add(p);
+//            }
+//        }
         for(ArrayList<Product> category : productList){ // Adds all products containing the user input into tempProductList.
             for(Product p : category){
                 if(p.getName().toLowerCase().contains(productName)){
@@ -351,6 +483,13 @@ public class Main {
         }
     }
     private static boolean checkIfProductExists(String productName){
+//
+//        for(Product p : completeList){
+//            if(productName.equalsIgnoreCase(p.getName())){
+//                System.out.println("\nA product with that name already exists. Try again.");
+//                return false;
+//            }
+//        }
 
         for(ArrayList<Product> list : productList){
             for(Product p : list){
@@ -386,7 +525,7 @@ public class Main {
         return userChoice;
     }
     private static double checkIfValidDoubleInput(){
-
+        //TODO Change it to take String as input. Use Regex to limit what the user can write, then parse to double.
         double value =-1; // Set to -1 to not accidentally return to menu if catch() is reached.
 
         try{
@@ -397,7 +536,7 @@ public class Main {
             }
 
             if(value<0.0){
-                System.out.println("\nA negative value are not allowed. Try again");
+                System.out.println("\nA negative value is not allowed. Try again");
             }
 
         }catch(InputMismatchException e){
@@ -544,8 +683,30 @@ public class Main {
         System.out.printf(Locale.ENGLISH,"%.2fkr%n",finalPrice);
 
     }
-    private static String capitalizeString(String string){
-        return string.toUpperCase().charAt(0)+string.substring(1).toLowerCase();
+    private static String capitalizeWordsOfString(String string){
+        if(string.contains(" ")){
+
+            String[] part = string.split(" +");
+            for(int i=0;i<part.length;i++){
+                part[i]= part[i].toUpperCase().charAt(0)+part[i].substring(1).toLowerCase();
+            }
+
+            String capitalizedString ="";
+
+            for (String s : part) {
+                capitalizedString = capitalizedString + s + " ";
+            }
+            capitalizedString = capitalizedString.substring(0, capitalizedString.length()-1);
+
+            return capitalizedString;
+
+        }else if(string.length()>=2){
+            return string.toUpperCase().charAt(0)+string.substring(1).toLowerCase();
+        }else{
+            return string.toUpperCase();
+        }
+
+
     }
     private static boolean returnToMenu(String userInput){
         if(userInput.equals("0")){
