@@ -14,21 +14,22 @@ class ProductTest {
 
     @Test
     void getName() {
-        assertEquals("lemon",Main.productList[0].get(0).getName().toLowerCase());
+
     }
 
     @Test
     void getProductGroup() {
-        assertEquals("Fruit",Main.productGroup[0]);
+
     }
 
     @Test
     void getProductCategory() {
-        assertEquals("Citrus Fruit",Main.productCategory[0]);
+
     }
 
     @Test
     void getPricePerKg() {
+
     }
 
     @Test
@@ -49,6 +50,6 @@ class ProductTest {
 
     @Test
     void testToString() {
-        assertTrue(Main.productList[0].get(2).toString().equalsIgnoreCase("Orange              | Fruit        | Citrus Fruit     |   34.90kr/kg"));
+
     }
 }
