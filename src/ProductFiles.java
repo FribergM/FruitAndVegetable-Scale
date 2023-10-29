@@ -12,9 +12,9 @@ import java.io.IOException;
  */
 
 public class ProductFiles {
-
-    public static final String productsFilePath = "products\\";
     private static ProductManagement productManagement = new ProductManagement();
+    public static final String productsFilePath = "Products\\";
+    public static final String productsFilePathCMD = "src\\Products\\";
 
     public static void createNewTextFile(String fileName){
 
@@ -28,14 +28,14 @@ public class ProductFiles {
 
 
     }
-    public static void saveProductsToTextFiles(){
+    public static void saveProductsToTextFiles(String filePath){
 
         for(String category : ProductManagement.productCategory){
-            clearFile(productsFilePath+category); //clears out matching productCategory file
+            clearFile(filePath+category); //clears out matching productCategory file
             for(Product product : productManagement.getProductList()){
                 if(product.getProductCategory().equalsIgnoreCase(category)){
 
-                    File file = new File(productsFilePath+category+".txt");
+                    File file = new File(filePath+category+".txt");
                     try(BufferedWriter writer = new BufferedWriter(new FileWriter(file,true))){
                         writer.write(product.toStringNonFormat()+"\n");
                     }catch(IOException e){

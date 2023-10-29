@@ -1,0 +1,6 @@
+Lemon,Fruit,Citrus Fruit,41.55
+Lime,Fruit,Citrus Fruit,79.75
+Orange,Fruit,Citrus Fruit,34.9
+Satsuma,Fruit,Citrus Fruit,34.9
+Grapefruit,Fruit,Citrus Fruit,31.75
+Clementine,Fruit,Citrus Fruit,31.75

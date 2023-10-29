@@ -2,6 +2,9 @@ import java.util.InputMismatchException;
 
 public class Utility {
 
+    public static final String PURPLE = "\033[0;35m";
+    public static final String RESETCOLOR = "\033[0m";
+
     public static String capitalizeWordsOfString(String string){
         if(string.contains(" ")){
 
@@ -75,6 +78,16 @@ public class Utility {
     }
     public static boolean checkIfValidString(String userInput){
         if(!userInput.matches("[A-ZÅÄÖa-zåäö0 ]+") || userInput.contains("0") && userInput.length() > 1){ // Checks to make sure String only consist of valid letters.
+            System.out.println("\nInvalid input. Please only use letters. Try again.");
+            return false;
+        }else if(userInput.isBlank()){
+            System.out.println("\nInvalid input. Field cannot be left blank. Try again.");
+            return false;
+        }
+        return true;
+    }
+    public static boolean checkIfValidAdminDetails(String userInput){
+        if(!userInput.matches("[A-ZÅÄÖa-zåäö0-9]+")){ // Checks to make sure String only consist of valid letters.
             System.out.println("\nInvalid input. Please only use letters. Try again.");
             return false;
         }else if(userInput.isBlank()){

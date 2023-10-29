@@ -42,7 +42,7 @@ public class ProductManagement {
             System.out.println("""
                 
                 PRODUCT SEARCH
-                Enter search method by number "0" to return to main menu.
+                Enter search method by number. "0" to return to main menu.
                 
                 SEARCH METHODS:
                 ----------------------------------
@@ -143,7 +143,7 @@ public class ProductManagement {
         tempProductList.clear();
     }
 
-    public void addProduct(){
+    public void addNewProduct(){
         String productName;
         int group;
         int category;
@@ -425,40 +425,10 @@ public class ProductManagement {
         }while(productWeight<=0);
 
         double finalPrice = productWeight*chosenProduct.getPricePerKg();
-//        System.out.println("\nThe price for "+productWeight+"kg '"+chosenProduct.getName()+"' is: ");
         System.out.printf(Locale.ENGLISH,"\nThe price for %.2fkg '%s' is: %n",productWeight,chosenProduct.getName());
         System.out.printf(Locale.ENGLISH,"%.2fkr%n",finalPrice);
 
     }
-
-//    private boolean returnToMenu(String userInput){
-//        if(userInput.equals("0")){
-//            tempProductList.clear();
-//            return true;
-//        }
-//        return false;
-//    }
-//    private boolean returnToMenu(int userInput){
-//        if(userInput == 0){
-//            tempProductList.clear();
-//            return true;
-//        }
-//        return false;
-//    }
-//    private boolean returnToMenu(double userInput){
-//        if(userInput == 0.0){
-//            tempProductList.clear();
-//            return true;
-//        }
-//        return false;
-//    }
-//    private boolean returnToMenu(Product userInput){
-//        if(userInput == null){
-//            tempProductList.clear();
-//            return true;
-//        }
-//        return false;
-//    }
 
     public ArrayList<Product> getProductList(){
         return productList;
