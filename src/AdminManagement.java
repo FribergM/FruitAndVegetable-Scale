@@ -1,8 +1,67 @@
+import java.io.BufferedReader;
+import java.io.Console;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class AdminManagement {
-    private ArrayList<Admin> adminList = new ArrayList<>();
+/**
+ * Name: Måns Friberg
+ * Email: mans.friberg@iths.se
+ * GitHub: https://github.com/FribergM/Labb1
+ */
 
+public class AdminManagement {
+    private static ArrayList<Admin> adminList = new ArrayList<>();
+
+    public static void adminLogin(){
+        boolean isValidCredentials = false;
+
+        do{
+
+            System.out.println("\nADMIN LOGIN\n\nEnter login credentials. \"0\" to return to main menu.");
+
+            Console console = System.console();
+
+            System.out.print("\nUsername: ");
+            String username = Main.input.nextLine();
+            if(Utility.returnToMenu(username)){
+                System.out.println("\nReturning to menu.");
+                return;
+            }
+            System.out.print("Password: ");
+            String password;
+            if(console != null){
+                char[] passwordChars = console.readPassword();
+                password = new String(passwordChars);
+            }else{
+                password = Main.input.nextLine();
+            }
+            if(Utility.returnToMenu(password)){
+                System.out.println("\nReturning to menu.");
+                return;
+            }
+
+            if(checkLoginDetails(username,password)){
+                System.out.println("\nLogin Successful!");
+                Main.adminMenu();
+                isValidCredentials = true;
+            }else{
+                System.out.println("\nIncorrect Username/Password. Try again.");
+            }
+
+        }while(!isValidCredentials);
+
+    }
+    private static boolean checkLoginDetails(String username, String password){
+
+        for(Admin a : adminList){
+            if(a.getUsername().equals(username) && a.getPassword().equals(password)){
+                return true;
+            }
+        }
+        return false;
+
+    }
     public void addNewAdmin(){
         String adminName;
         String adminUsername="USERNAME";
@@ -29,7 +88,11 @@ public class AdminManagement {
         }
 
         adminList.add(new Admin(adminName,adminUsername,adminPassword));
-        System.out.println("\nAdmin account created!");
+        System.out.println("\nAdmin account: "+adminUsername+" created!");
+
+
+        FileManagement.saveAdminsToTextFiles("AdminLogin");
+
     }
     private String createAdminName(){
         String adminName;
@@ -88,7 +151,10 @@ public class AdminManagement {
         }
         return true;
     }
+    public void addAdminToList(Admin newAdmin){
+        adminList.add(newAdmin);
+    }
     public ArrayList<Admin> getAdminList(){
-        return this.adminList;
+        return adminList;
     }
 }

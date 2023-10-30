@@ -60,6 +60,6 @@ public class Product {
         return String.format(Locale.ENGLISH,"%-20s| %-13s| %-17s| %7.2fkr/kg",name,productGroup,productCategory, pricePerKg);
     }
     public String toStringNonFormat(){
-        return name+","+productGroup+","+productCategory+","+pricePerKg;
+        return name+','+productGroup+','+productCategory+','+pricePerKg;
     }
 }

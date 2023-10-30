@@ -1,4 +1,0 @@
-Peach,Fruit,Stone Fruit,39.9
-Nectarine,Fruit,Stone Fruit,39.9
-Apricot,Fruit,Stone Fruit,54.95
-Plum,Fruit,Stone Fruit,25.95

@@ -1,7 +1,0 @@
-Brussels Sprouts,Vegetables,Cole Crops,39.9
-Broccoli,Vegetables,Cole Crops,67.9
-Turnip,Vegetables,Cole Crops,54.9
-Cauliflower,Vegetables,Cole Crops,29.9
-Cabbage,Vegetables,Cole Crops,19.9
-Red Cabbage,Vegetables,Cole Crops,24.9
-Kale,Vegetables,Cole Crops,95.9

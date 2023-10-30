@@ -1,5 +1,11 @@
 import java.util.InputMismatchException;
 
+/**
+ * Name: Måns Friberg
+ * Email: mans.friberg@iths.se
+ * GitHub: https://github.com/FribergM/Labb1
+ */
+
 public class Utility {
 
     public static final String PURPLE = "\033[0;35m";
@@ -87,8 +93,8 @@ public class Utility {
         return true;
     }
     public static boolean checkIfValidAdminDetails(String userInput){
-        if(!userInput.matches("[A-ZÅÄÖa-zåäö0-9]+")){ // Checks to make sure String only consist of valid letters.
-            System.out.println("\nInvalid input. Please only use letters. Try again.");
+        if(!userInput.matches("[A-Za-z0-9]+")){ // Checks to make sure String only consist of valid letters.
+            System.out.println("\nInvalid input. Only characters 'A-Z' and '0-9' allowed. Try again.");
             return false;
         }else if(userInput.isBlank()){
             System.out.println("\nInvalid input. Field cannot be left blank. Try again.");

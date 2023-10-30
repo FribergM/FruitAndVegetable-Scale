@@ -1,7 +1,0 @@
-Yellow Onion,Vegetables,Onions,19.9
-Red Onion,Vegetables,Onions,23.9
-White Onion,Vegetables,Onions,66.33
-Garlic,Vegetables,Onions,69.9
-Shallot,Vegetables,Onions,44.9
-Leek,Vegetables,Onions,29.9
-Green Onion,Vegetables,Onions,19.9

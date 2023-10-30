@@ -1,6 +1,0 @@
-Red bell Pepper,Vegetables,Peppers,44.9
-Yellow bell Pepper,Vegetables,Peppers,44.9
-Green bell Pepper,Vegetables,Peppers,44.9
-Red chili,Vegetables,Peppers,209.0
-Jalapeno,Vegetables,Peppers,249.0
-Habanero,Vegetables,Peppers,279.0

@@ -32,7 +32,7 @@ public class ProductManagement {
                 "Other Vegetables",
                 "Mushrooms",
         };
-        ProductFiles.initializeProductsFromFiles();
+        FileManagement.initializeProductsFromFiles();
     }
     public void searchForProduct(){
 
@@ -211,6 +211,8 @@ public class ProductManagement {
         registerProductInCategory(newProduct);
 
         System.out.println(productName+" has been registered!");
+
+        FileManagement.saveProductsToTextFiles(FileManagement.productsFilePath);
     }
     private void registerProductInCategory(Product newProduct){
         String category = newProduct.getProductCategory();
@@ -266,6 +268,7 @@ public class ProductManagement {
             }
         }
 
+        FileManagement.saveProductsToTextFiles(FileManagement.productsFilePath);
 
         tempProductList.clear();
     }
@@ -274,9 +277,10 @@ public class ProductManagement {
         System.out.printf("| %-20s| %-13s| %-17s| %-12s |%n","Product","Group","Category","Price");
         System.out.println("------------------------------------------------------------------------");
 
-        for(int i = 0; i< productList.size()-1; i++){
+        for(int i = 0; i< productList.size(); i++){
             System.out.printf("| %s |%n", productList.get(i));
-            if(!productList.get(i).getProductCategory().equalsIgnoreCase(productList.get(i+1).getProductCategory())){
+            // Compares to the next product in the list, adding a line if they are no longer of the same category.
+            if(i < productList.size()-1 && !productList.get(i).getProductCategory().equalsIgnoreCase(productList.get(i+1).getProductCategory())){
                 System.out.println("------------------------------------------------------------------------");
             }
         }
@@ -433,7 +437,7 @@ public class ProductManagement {
     public ArrayList<Product> getProductList(){
         return productList;
     }
-    public void initAddToList(Product productFromFile){
+    public void addProductToList(Product productFromFile){
         productList.add(productFromFile);
     }
 }

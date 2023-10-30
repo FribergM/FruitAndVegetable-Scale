@@ -1,8 +1,0 @@
-Carrot,Vegetables,Root Vegetables,15.9
-Parsnip,Vegetables,Root Vegetables,24.9
-Potato,Vegetables,Root Vegetables,15.9
-Sweet Potato,Vegetables,Root Vegetables,29.9
-Horseradish,Vegetables,Root Vegetables,129.0
-Beetroot,Vegetables,Root Vegetables,19.9
-Swedish Turnip,Vegetables,Root Vegetables,34.9
-Radish,Vegetables,Root Vegetables,39.9
