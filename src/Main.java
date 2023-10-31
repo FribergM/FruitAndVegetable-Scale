@@ -47,7 +47,7 @@ public class Main {
                 switch(menuChoice){
                     case 1 -> productManagement.searchForProduct();
                     case 2 -> productManagement.showAllProducts();
-                    case 3 -> adminManagement.adminLogin();
+                    case 3 -> AdminManagement.adminLogin();
                     case 0 -> System.out.println("\nExiting program...");
 
                     default -> System.out.println("\nThat option does not exist. Try again.");

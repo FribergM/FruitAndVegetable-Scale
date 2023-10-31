@@ -88,7 +88,7 @@ public class ProductManagement {
         if(Utility.returnToMenu(chosenProduct)){
             return;
         }
-
+        //TODO Make it create a CartItem and add to ShoppingCart.
         calculatePrice(chosenProduct);
 
         tempProductList.clear();
@@ -137,7 +137,7 @@ public class ProductManagement {
             System.out.println("\nReturning to menu...");
             return;
         }
-
+        //TODO Make it create a CartItem and add to ShoppingCart.
         calculatePrice(chosenProduct);
 
         tempProductList.clear();
@@ -410,8 +410,8 @@ public class ProductManagement {
         System.out.println("------------------------------------------------------------------------");
     }
 
-
     private void calculatePrice(Product chosenProduct){
+        //TODO Change to be Shopping Checkout.
         double productWeight;
 
         do{

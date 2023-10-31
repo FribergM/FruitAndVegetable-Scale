@@ -10,6 +10,7 @@ public class Product {
     private String productGroup;
     private String productCategory;
     private double pricePerKg;
+    private Discount discount;
 
     public Product(String name){
         this.name = name;
@@ -42,6 +43,9 @@ public class Product {
     public double getPricePerKg(){
         return this.pricePerKg;
     }
+    public Discount getDiscount(){
+        return this.discount;
+    }
     public void setName(String name){
         this.name = name;
     }
@@ -53,6 +57,9 @@ public class Product {
     }
     public void setPricePerKg(double pricePerKg){
         this.pricePerKg = pricePerKg;
+    }
+    public void setDiscount(Discount discount){
+        this.discount = discount;
     }
 
     @Override
