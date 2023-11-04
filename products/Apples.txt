@@ -1,3 +1,3 @@
-Granny Smith Apple,Fruit,Apples,39.9
-Pink Lady Apple,Fruit,Apples,42.9
-Royal Gala Apple,Fruit,Apples,36.9
+Granny Smith Apple,Fruit,Apples,39.9,null
+Pink Lady Apple,Fruit,Apples,42.9,null
+Royal Gala Apple,Fruit,Apples,36.9,null

@@ -9,7 +9,16 @@ public class AmountDiscount implements Discount{
         double productPricePerKg = cartItem.getProduct().getPricePerKg();
         return productPricePerKg - amount;
     }
-    public String discountToString(){
-        return amount + "kr off";
+    @Override
+    public double applyDiscountForPrint(Product product) {
+        return product.getPricePerKg() - amount;
+    }
+    @Override
+    public String toString(){
+        return (amount + "kr off").replace('.',',');
+    }
+    @Override
+    public String discountTypeString(){ //Used for saving to product file
+        return "Amount%"+amount;
     }
 }

@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.InputMismatchException;
 
 /**
@@ -9,9 +11,12 @@ import java.util.InputMismatchException;
 public class Utility {
 
     public static final String PURPLE = "\033[0;35m";
-    public static final String RESETCOLOR = "\033[0m";
+    public static final String RESET_COLOR = "\033[0m";
 
-    public static String capitalizeWordsOfString(String string){
+    public static Date currentDate = new Date();
+    public static SimpleDateFormat date = new SimpleDateFormat("yyyy.MM.dd '-' HH:mm:ss");
+
+    public static String capitalizeWordsInString(String string){
         if(string.contains(" ")){
 
             String[] part = string.split(" +");
@@ -34,7 +39,27 @@ public class Utility {
             return string.toUpperCase();
         }
     }
-    public static int checkIfValidIntInput(String choice, int minValue, int maxValue){
+    public static boolean confirmRemoval(String dataType){
+        int confirmationChoice;
+
+        do{
+            System.out.println("\nAre you sure you wish to remove that "+dataType+'?');
+            System.out.println("""
+
+                CONFIRM REMOVAL
+                ----------------------------
+                | 1. Confirm removal       |
+                | 0. Cancel                |
+                ----------------------------""");
+
+            confirmationChoice = checkIfValidIntInput("choice",0,1);
+
+
+        }while(confirmationChoice<0 || confirmationChoice>1);
+
+        return confirmationChoice == 1;
+    }
+    public static int checkIfValidIntInput(String choiceType, int minValue, int maxValue){
 
         int userChoice=-1; // Set to -1 to not accidentally return to menu if catch() is reached.
 
@@ -47,7 +72,7 @@ public class Utility {
             }
 
             if(userChoice <minValue || userChoice >maxValue){
-                System.out.println("\nThat "+choice+" does not exist. Try again.");
+                System.out.println("\nThat "+choiceType+" does not exist. Try again.");
             }
 
         }catch(InputMismatchException e){
@@ -64,7 +89,6 @@ public class Utility {
         String regexPattern = "\\d+\\.?\\d*"; // = (1 or more digits)+(1 or 0 '.')+(0 or more digits)
         if(valueString.isBlank()){
             System.out.println("\nField cannot be left blank. Try again.");
-            return value;
         }else if(!valueString.matches(regexPattern)){
             System.out.println("\nInvalid input! Try again");
         }else{

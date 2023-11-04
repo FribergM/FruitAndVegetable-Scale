@@ -1,6 +1,6 @@
-Banana,Fruit,Other Fruit,23.9
-Banana Eco,Fruit,Other Fruit,28.9
-Watermelon,Fruit,Other Fruit,24.9
-Cantaloupe,Fruit,Other Fruit,49.9
-Honey Melon,Fruit,Other Fruit,29.9
-Pear,Fruit,Other Fruit,36.9
+Banana,Fruit,Other Fruit,23.9,null
+Banana Eco,Fruit,Other Fruit,28.9,null
+Watermelon,Fruit,Other Fruit,24.9,null
+Cantaloupe,Fruit,Other Fruit,49.9,null
+Honey Melon,Fruit,Other Fruit,29.9,null
+Pear,Fruit,Other Fruit,36.9,null

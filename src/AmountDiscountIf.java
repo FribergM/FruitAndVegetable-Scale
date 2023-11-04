@@ -16,9 +16,17 @@ public class AmountDiscountIf implements Discount{
         }else{
             return productPricePerKg;
         }
-
     }
-    public String discountToString(){
-        return amount + "kr off (if > "+minWeightForDiscount+"kg)";
+    @Override
+    public double applyDiscountForPrint(Product product) {
+        return product.getPricePerKg() - amount;
+    }
+    @Override
+    public String toString(){
+        return (amount + "kr off (if >= "+minWeightForDiscount+"kg)").replace('.',',');
+    }
+    @Override
+    public String discountTypeString(){ //Used for saving to product file
+        return "AmountIf%"+amount+'%'+minWeightForDiscount;
     }
 }

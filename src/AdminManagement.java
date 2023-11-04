@@ -40,8 +40,11 @@ public class AdminManagement {
 
             if(checkLoginDetails(username,password)){
                 System.out.println("\nLogin Successful!");
-                Main.adminMenu();
+                Main.isAdmin = true;
                 isValidCredentials = true;
+
+                Main.adminMenu();
+
             }else{
                 System.out.println("\nIncorrect Username/Password. Try again.");
             }
@@ -70,16 +73,16 @@ public class AdminManagement {
             System.out.println("\nReturning to main...");
             return;
         }
-        adminName = Utility.capitalizeWordsOfString(adminName);
+        adminName = Utility.capitalizeWordsInString(adminName);
 
         adminUsername = createAdminCredentials(adminUsername);
-        if(Utility.returnToMenu(adminName)){
+        if(Utility.returnToMenu(adminUsername)){
             System.out.println("\nReturning to main...");
             return;
         }
 
         adminPassword = createAdminCredentials(adminPassword);
-        if(Utility.returnToMenu(adminName)){
+        if(Utility.returnToMenu(adminPassword)){
             System.out.println("\nReturning to main...");
             return;
         }
@@ -117,7 +120,7 @@ public class AdminManagement {
         do{
 
             System.out.println("\nEnter the "+credentialType+" for the admin account. \"0\" to return to main menu.");
-            Utility.capitalizeWordsOfString(credentialType);
+            Utility.capitalizeWordsInString(credentialType);
             System.out.print("\n"+credentialType+": ");
 
             adminCredential = Main.input.nextLine();

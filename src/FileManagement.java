@@ -24,7 +24,7 @@ public class FileManagement {
                 if(product.getProductCategory().equalsIgnoreCase(category)){
 
                     try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath+category+".txt",true))){
-                        writer.write(product.toStringNonFormat()+"\n");
+                        writer.write(product.saveToFileFormat()+"\n");
                     }catch(IOException e){
                         System.out.println("IO EXCEPTION: saveProductsToTextFiles");
                     }
@@ -63,7 +63,26 @@ public class FileManagement {
                     String productCategory = part[2];
                     double pricePerKg = Double.parseDouble(part[3]);
 
-                    Product newProduct = new Product(productName,productGroup, productCategory,pricePerKg);
+                    Discount productDiscount = null;
+
+                    if(part.length>4 && !part[4].equals("null")){
+                        String[] discountPart = part[4].split("%");
+                        String discountType = discountPart[0];
+                        double discountAmount = Double.parseDouble(discountPart[1]);
+                        double discountThreshold = 0;
+                        if(discountPart.length>2){
+                            discountThreshold = Double.parseDouble(discountPart[2]);
+                        }
+
+                        switch(discountType){
+                            case "Percent" -> productDiscount = new PercentDiscount(discountAmount);
+                            case "Amount" -> productDiscount = new AmountDiscount(discountAmount);
+                            case "PercentIf" -> productDiscount = new PercentDiscountIf(discountAmount,discountThreshold);
+                            case "AmountIf" -> productDiscount = new AmountDiscountIf(discountAmount,discountThreshold);
+                        }
+                    }
+
+                    Product newProduct = new Product(productName,productGroup, productCategory,pricePerKg,productDiscount);
                     productManagement.addProductToList(newProduct);
 
                 }
@@ -88,5 +107,8 @@ public class FileManagement {
         }catch(IOException e){
             System.out.println("IO EXCEPTION: initializeAdminAccountFromFiles");
         }
+    }
+    public static void saveReceiptToFile(){
+        //TODO Finish this functionality.
     }
 }

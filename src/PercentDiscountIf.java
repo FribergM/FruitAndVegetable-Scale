@@ -17,9 +17,19 @@ public class PercentDiscountIf implements Discount{
         }else{
             return productPricePerKg;
         }
+    }
+    @Override
+    public double applyDiscountForPrint(Product product) {
+        double discountAmount = (product.getPricePerKg()*discountPercentage)/100;
+        return product.getPricePerKg()- discountAmount;
 
     }
-    public String discountToString(){
-        return discountPercentage + "% off (if > "+minWeightForDiscount+"kg)";
+    @Override
+    public String toString(){
+        return (discountPercentage + "% off (if >= "+minWeightForDiscount+"kg)").replace('.',',');
+    }
+    @Override
+    public String discountTypeString(){ //Used for saving to product file
+        return "PercentIf%"+discountPercentage+'%'+minWeightForDiscount;
     }
 }

@@ -1,6 +1,6 @@
-Ginger,Vegetables,Other Vegetables,99.9
-Cucumber,Vegetables,Other Vegetables,56.9
-Tomato,Vegetables,Other Vegetables,39.9
-Cocktail Tomato,Vegetables,Other Vegetables,107.6
-Asparagus Green,Vegetables,Other Vegetables,219.9
-Asparagus White,Vegetables,Other Vegetables,139.9
+Ginger,Vegetables,Other Vegetables,99.9,null
+Cucumber,Vegetables,Other Vegetables,56.9,null
+Tomato,Vegetables,Other Vegetables,39.9,null
+Cocktail Tomato,Vegetables,Other Vegetables,107.6,null
+Asparagus Green,Vegetables,Other Vegetables,219.9,null
+Asparagus White,Vegetables,Other Vegetables,139.9,null

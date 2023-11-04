@@ -1,5 +1,3 @@
-import java.util.Locale;
-
 /**
  * Name: Måns Friberg
  * Email: mans.friberg@iths.se
@@ -11,24 +9,26 @@ public class Product {
     private String productCategory;
     private double pricePerKg;
     private Discount discount;
+    private double discountedPrice;
 
-    public Product(String name){
-        this.name = name;
-    }
-    public Product(String name,String productGroup){
-        this.name = name;
-        this.productGroup = productGroup;
-    }
-    public Product(String name, String productGroup,String productCategory){
-        this.name = name;
-        this.productGroup = productGroup;
-        this.productCategory = productCategory;
-    }
     public Product(String name, String productGroup, String productCategory, double pricePerKg){
         this.name = name;
         this.productGroup = productGroup;
         this.productCategory = productCategory;
         this.pricePerKg = pricePerKg;
+    }
+    public Product(String name, String productGroup, String productCategory, double pricePerKg, Discount discount){
+        this.name = name;
+        this.productGroup = productGroup;
+        this.productCategory = productCategory;
+        this.pricePerKg = pricePerKg;
+        this.discount = discount;
+        updateDiscountedPrice();
+    }
+    public void updateDiscountedPrice(){
+        if(discount != null){
+            discountedPrice = discount.applyDiscountForPrint(this);
+        }
     }
 
     public String getName(){
@@ -64,9 +64,21 @@ public class Product {
 
     @Override
     public String toString() {
-        return String.format(Locale.ENGLISH,"%-20s| %-13s| %-17s| %7.2fkr/kg",name,productGroup,productCategory, pricePerKg);
+        if(discount == null){
+            return String.format("%-20s| %-13s| %-17s| %7.2fkr/kg | %-25s| %13s",
+                    name,productGroup,productCategory, pricePerKg,"","");
+        }else{
+            return String.format("%-20s| %-13s| %-17s| %7.2fkr/kg | %-25s| *%7.2fkr/kg",
+                    name,productGroup,productCategory, pricePerKg,discount,discountedPrice);
+        }
+
     }
-    public String toStringNonFormat(){
-        return name+','+productGroup+','+productCategory+','+pricePerKg;
+    public String saveToFileFormat(){ //Used for saving to product file
+        if(discount == null){
+            return name+','+productGroup+','+productCategory+','+pricePerKg+','+"null";
+        }else{
+            return name+','+productGroup+','+productCategory+','+pricePerKg+','+discount.discountTypeString();
+        }
+
     }
 }
