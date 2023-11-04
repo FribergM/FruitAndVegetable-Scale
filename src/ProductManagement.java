@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Name: Måns Friberg
  * Email: mans.friberg@iths.se
- * GitHub: https://github.com/FribergM/Labb1
+ * GitHub: https://github.com/FribergM/FruitAndVegetable-Scale
  */
 
 public class ProductManagement {

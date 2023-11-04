@@ -1,3 +1,9 @@
+/**
+ * Name: Måns Friberg
+ * Email: mans.friberg@iths.se
+ * GitHub: https://github.com/FribergM/FruitAndVegetable-Scale
+ */
+
 public class PercentDiscount implements Discount{
     private double discountPercentage;
 

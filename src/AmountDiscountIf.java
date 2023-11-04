@@ -1,3 +1,9 @@
+/**
+ * Name: Måns Friberg
+ * Email: mans.friberg@iths.se
+ * GitHub: https://github.com/FribergM/FruitAndVegetable-Scale
+ */
+
 public class AmountDiscountIf implements Discount{
     private double amount;
     private double minWeightForDiscount;

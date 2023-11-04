@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
+/**
+ * Name: Måns Friberg
+ * Email: mans.friberg@iths.se
+ * GitHub: https://github.com/FribergM/FruitAndVegetable-Scale
+ */
+
 public class ShoppingCart {
     private static ArrayList<CartItem> shoppingCart = new ArrayList<>();
 

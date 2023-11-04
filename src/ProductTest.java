@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Name: Måns Friberg
  * Email: mans.friberg@iths.se
- * GitHub: https://github.com/FribergM/Labb1
+ * GitHub: https://github.com/FribergM/FruitAndVegetable-Scale
  */
 
 class ProductTest {

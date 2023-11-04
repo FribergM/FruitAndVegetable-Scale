@@ -1,3 +1,8 @@
+/**
+ * Name: Måns Friberg
+ * Email: mans.friberg@iths.se
+ * GitHub: https://github.com/FribergM/FruitAndVegetable-Scale
+ */
 
 public class CartItem {
     private Product product;
