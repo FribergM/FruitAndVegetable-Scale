@@ -16,7 +16,7 @@ public class ProductManagement {
 
     public void initializeProducts() {
 
-        productGroup = new String[]{"Fruit", "Vegetables", "Mushrooms"};
+        productGroup = new String[]{"Fruit", "Vegetables", "Other", "Discounted Products"};
 
         productCategory = new String[]{
                 "Apples",
@@ -50,7 +50,7 @@ public class ProductManagement {
 
             searchChoice = Utility.checkIfValidIntInput("menu option",1,2);
 
-            if(Utility.returnToMenu(searchChoice)){
+            if(Utility.returnToMenu(searchChoice)){// Handles if user inputs "0" to return to menu.
                 System.out.println("\nReturning to menu...");
                 return;
             }
@@ -111,7 +111,10 @@ public class ProductManagement {
             userCategoryChoice = getCategoryChoice(userGroupChoice,1,4);
         }else if(userGroupChoice == 2) {
             userCategoryChoice = getCategoryChoice(userGroupChoice, 1, 5);
+        }else if(userGroupChoice == 3){
+            userCategoryChoice = getCategoryChoice(userGroupChoice,1,1);
         }
+
 
         if(Utility.returnToMenu(userCategoryChoice)){
             System.out.println("\nReturning to menu...");
@@ -122,15 +125,20 @@ public class ProductManagement {
             userCategoryChoice -= 1;// Changes it to match the desired index for productCategory[0/1/2/3]
         }else if(userGroupChoice == 2){
             userCategoryChoice += 3;// Changes it to match the desired index for productCategory[4/5/6/7/8]
-        }else{
+        }else if(userGroupChoice == 3){
             userCategoryChoice =9; // Changes it to match the desired index for productCategory[9] (Mushrooms)
         }
 
-        for(Product p : productList){
-            if (p.getProductCategory().equals(productCategory[userCategoryChoice])) {
-                tempProductList.add(p);
+        if(userGroupChoice == 4){
+            findDiscountedProducts();
+        }else{
+            for(Product p : productList){
+                if (p.getProductCategory().equals(productCategory[userCategoryChoice])) {
+                    tempProductList.add(p);
+                }
             }
         }
+
 
         Product chosenProduct = getChosenProduct();
 
@@ -145,7 +153,6 @@ public class ProductManagement {
         }
         tempProductList.clear();
     }
-
     private void createCartItem(Product chosenProduct) {
 
         double productAmount = getProductAmountByWeight(chosenProduct);
@@ -233,7 +240,7 @@ public class ProductManagement {
         String category = newProduct.getProductCategory();
         int lastIndex = -1;
 
-        // Finds corresponding category from the bottom up in the list.
+        // Finds corresponding category from the bottom up in the productList.
         for(int i = productList.size()-1; i>=0; i--){
             if(productList.get(i).getProductCategory().equals(category)){
                 lastIndex = i;
@@ -270,7 +277,7 @@ public class ProductManagement {
 
         printChosenProduct(chosenProduct);
 
-        if(!Utility.confirmRemoval("product")){
+        if(!Utility.confirmRemoval("this product")){
             System.out.println("\nReturning to menu...");
             return;
         }
@@ -366,6 +373,15 @@ public class ProductManagement {
                 tempProductList.add(product);
             }
         }
+
+    }
+    private boolean checkIfDiscountExists(){
+        for(Product p : productList){
+            if(p.getDiscount() != null){
+                return true;
+            }
+        }
+        return false;
     }
     public double[] getDiscountValues(int discountChoice, Product chosenProduct){
         double[] discountValues = new double[2];
@@ -440,11 +456,15 @@ public class ProductManagement {
         return discountChoice;
     }
     public Product getDiscountedProduct(){
-        findDiscountedProducts();
-        if(tempProductList.isEmpty()){
+
+        if(checkIfDiscountExists()){
+            findDiscountedProducts();
+
+        }else{
             System.out.println("\nNo products are discounted.");
             return null;
         }
+
         return getChosenProduct();
     }
 
@@ -473,19 +493,26 @@ public class ProductManagement {
     private int getGroupChoice(){
 
         int userGroupChoice;
+        int showIfDiscountExists;
+
+        if(checkIfDiscountExists()){//Hides "Discounted products" Group choice if none exist.
+            showIfDiscountExists = 1;
+        }else{
+            showIfDiscountExists = 0;
+        }
 
         do{
             System.out.println("\nChoose a product group by number. \"0\" to return to main menu.");
 
             printProductGroups();
 
-            userGroupChoice = Utility.checkIfValidIntInput("product group",1,3);
+            userGroupChoice = Utility.checkIfValidIntInput("product group",1,3+ showIfDiscountExists);
 
             if(Utility.returnToMenu(userGroupChoice)){
                 return 0;
             }
 
-        }while(userGroupChoice < 1 || userGroupChoice > 3);
+        }while(userGroupChoice < 1 || userGroupChoice > 3+ showIfDiscountExists);
 
         return userGroupChoice;
     }
@@ -556,22 +583,30 @@ public class ProductManagement {
 
         if(calledFromMethod.equals("printProducts")){
             System.out.println("-----------------------------------------------------------------------------------------------------------------------");
-            System.out.printf("| %-24s| %-13s| %-17s| %-13s| %-25s| %-13s |%n","Product","Group","Category","Price","Active Discount ----->","* New Price");
+            System.out.printf("| %-24s| %-13s| %-17s| %-13s| %-25s| %-13s |%n","Product","Group","Category","Price","Active Discount","Reduced Price");
             System.out.println("-----------------------------------------------------------------------------------------------------------------------");
         }else{
             System.out.println("-------------------------------------------------------------------------------------------------------------------");
-            System.out.printf("| %-20s| %-13s| %-17s| %-13s| %-25s| %-13s |%n","Product","Group","Category","Price","Active Discount ----->","* New Price");
+            System.out.printf("| %-20s| %-13s| %-17s| %-13s| %-25s| %-13s |%n","Product","Group","Category","Price","Active Discount","Reduced Price");
             System.out.println("-------------------------------------------------------------------------------------------------------------------");
         }
 
     }
     private void printProductGroups(){
-        System.out.println("\nGROUPS:");
-        System.out.println("-------------------------");
-        for(int i=0;i<productGroup.length;i++){
-            System.out.printf("| %-3s %-17s |%n",(i+1)+".",productGroup[i]);
+        int ignoreLastIfNoDiscount;
+
+        if(checkIfDiscountExists()){//Hides "Discounted products" Group choice if none exist.
+            ignoreLastIfNoDiscount = 0;
+        }else{
+            ignoreLastIfNoDiscount = 1;
         }
-        System.out.println("-------------------------");
+
+        System.out.println("\nGROUPS:");
+        System.out.println("----------------------------");
+        for(int i=0;i<productGroup.length-ignoreLastIfNoDiscount;i++){
+            System.out.printf("| %-3s %-20s |%n",(i+1)+".",productGroup[i]);
+        }
+        System.out.println("----------------------------");
     }
     private void printProductCategory(int userGroupChoice){
         System.out.println("\nCATEGORIES:");
@@ -580,10 +615,12 @@ public class ProductManagement {
             for(int i=0;i<4;i++){ // Shows all Fruit categories from productCategory[]
                 System.out.printf("| %-3s %-17s |%n",(i+1)+".", productCategory[i]);
             }
-        }else{
+        }else if(userGroupChoice == 2){
             for(int i = 4; i< productCategory.length-1; i++){ // Shows all Vegetable categories from productCategory[]
                 System.out.printf("| %-3s %-17s |%n",(i-3)+".", productCategory[i]);
             }
+        }else{
+            System.out.printf("| %-3s %-17s |%n",1+".", productCategory[9]);
         }
         System.out.println("-------------------------");
     }

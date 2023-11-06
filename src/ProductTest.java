@@ -15,7 +15,7 @@ class ProductTest {
 
     @BeforeEach
     void setUp() {
-//        Main.initializeProducts();
+
     }
 
     @Test

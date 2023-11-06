@@ -1,8 +1,6 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Name: Måns Friberg
@@ -17,6 +15,8 @@ public class FileManagement {
     public static final String productsFilePath = "Products\\";
 
     public static void saveProductsToTextFiles(String filePath){
+
+        createDirectory("Products");
 
         for(String category : ProductManagement.productCategory){
             clearFile(filePath+category); //clears out matching productCategory file
@@ -33,13 +33,13 @@ public class FileManagement {
         }
 
     }
-    public static void saveAdminsToTextFiles(String fileName){
-        clearFile(fileName);
+    public static void saveAdminsToTextFile(){
+        clearFile("AdminLogin");
         for(Admin a : adminManagement.getAdminList()){
-            try(BufferedWriter writer = new BufferedWriter(new FileWriter(fileName+".txt",true))){
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter("AdminLogin.txt",true))){
                 writer.write(a.toString()+"\n");
             }catch(IOException e){
-                System.out.println("IO EXCEPTION: saveAdminsToTextFiles");
+                System.out.println("IO EXCEPTION: saveAdminsToTextFile");
             }
         }
     }
@@ -82,8 +82,7 @@ public class FileManagement {
                         }
                     }
 
-                    Product newProduct = new Product(productName,productGroup, productCategory,pricePerKg,productDiscount);
-                    productManagement.addProductToList(newProduct);
+                    productManagement.addProductToList(new Product(productName,productGroup, productCategory,pricePerKg,productDiscount));
 
                 }
             }catch(IOException e){
@@ -108,7 +107,23 @@ public class FileManagement {
             System.out.println("IO EXCEPTION: initializeAdminAccountFromFiles");
         }
     }
-    public static void saveReceiptToFile(){
-        //TODO Finish this functionality.
+    public static void saveReceiptToFile(StringBuilder shoppingCartPrint){
+        Date currentDate = new Date();
+        SimpleDateFormat dateAndTime = new SimpleDateFormat("yyyy.MM.dd_HH.mm.ss");
+        String currentTime = dateAndTime.format(currentDate);
+
+        createDirectory("Receipts");
+
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("Receipts\\Receipt_"+currentTime+".txt"))){
+            writer.write(shoppingCartPrint.toString());
+        }catch(IOException e){
+            System.out.println("IO EXCEPTION: saveReceiptsToFile");
+        }
+    }
+    private static void createDirectory(String directoryName){
+        File receiptDirectory = new File(directoryName);
+        if(!receiptDirectory.exists()){
+            receiptDirectory.mkdirs();
+        }
     }
 }

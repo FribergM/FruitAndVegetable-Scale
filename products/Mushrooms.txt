@@ -1,5 +1,5 @@
-Chanterelle,Mushrooms,Mushrooms,199.0,null
-Champignon,Mushrooms,Mushrooms,59.9,null
-Oyster Mushroom,Mushrooms,Mushrooms,169.0,null
-Portabello,Mushrooms,Mushrooms,99.0,null
-Shiitake,Mushrooms,Mushrooms,199.0,null
+Chanterelle,Other,Mushrooms,199.0,null
+Champignon,Other,Mushrooms,59.9,null
+Oyster Mushroom,Other,Mushrooms,169.0,null
+Portabello,Other,Mushrooms,99.0,null
+Shiitake,Other,Mushrooms,199.0,null

@@ -1,5 +1,3 @@
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.InputMismatchException;
 
 /**
@@ -12,9 +10,6 @@ public class Utility {
 
     public static final String PURPLE = "\033[0;35m";
     public static final String RESET_COLOR = "\033[0m";
-
-    public static Date currentDate = new Date();
-    public static SimpleDateFormat date = new SimpleDateFormat("yyyy.MM.dd '-' HH:mm:ss");
 
     public static String capitalizeWordsInString(String string){
         if(string.contains(" ")){
@@ -43,7 +38,7 @@ public class Utility {
         int confirmationChoice;
 
         do{
-            System.out.println("\nAre you sure you wish to remove that "+dataType+'?');
+            System.out.println("\nAre you sure you wish to remove "+dataType+'?');
             System.out.println("""
 
                 CONFIRM REMOVAL
@@ -128,6 +123,7 @@ public class Utility {
     }
 
     public static boolean returnToMenu(String userInput){
+        // Handles if user inputs "0" to return to menu.
         if(userInput.equals("0")){
             ProductManagement.tempProductList.clear();
             return true;
@@ -135,6 +131,7 @@ public class Utility {
         return false;
     }
     public static boolean returnToMenu(int userInput){
+        // Handles if user inputs "0" to return to menu.
         if(userInput == 0){
             ProductManagement.tempProductList.clear();
             return true;
@@ -142,6 +139,7 @@ public class Utility {
         return false;
     }
     public static boolean returnToMenu(double userInput){
+        // Handles if user inputs "0" to return to menu.
         if(userInput == 0.0){
             ProductManagement.tempProductList.clear();
             return true;
@@ -149,6 +147,7 @@ public class Utility {
         return false;
     }
     public static boolean returnToMenu(Product userInput){
+        // Handles if user inputs "0" to return to menu.
         if(userInput == null){
             ProductManagement.tempProductList.clear();
             return true;

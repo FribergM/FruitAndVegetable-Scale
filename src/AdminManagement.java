@@ -91,7 +91,7 @@ public class AdminManagement {
         System.out.println("\nAdmin account: "+adminUsername+" created!");
 
 
-        FileManagement.saveAdminsToTextFiles("AdminLogin");
+        FileManagement.saveAdminsToTextFile();
 
     }
     private String createAdminName(){

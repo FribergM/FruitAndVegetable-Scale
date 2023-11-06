@@ -36,6 +36,10 @@ public class CartItem {
     public double getCartItemPrice() {
         return cartItemPrice;
     }
+    public void setWeight(double weight){
+        this.weight = weight;
+        calculateItemPrice();
+    }
 
     @Override
     public String toString() {

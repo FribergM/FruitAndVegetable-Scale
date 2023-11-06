@@ -9,20 +9,23 @@ import java.util.Scanner;
 
 public class Main {
     public static Scanner input = new Scanner(System.in);
-
     private static ProductManagement productManagement = new ProductManagement();
     private static AdminManagement adminManagement = new AdminManagement();
     private static ShoppingCart shoppingCart = new ShoppingCart();
+
     public static boolean isAdmin = false;
 
     public static void main(String[] args) {
-        System.out.println("Welcome to the Fruit & Vegetable Scale!");
+        greetingMessage();
 
         productManagement.initializeProducts();
         FileManagement.initializeAdminAccountsFromFiles();
 
         menu();
 
+    }
+    public static void greetingMessage(){
+        System.out.println("\nWelcome to the Fruit & Vegetable Scale!");
     }
 
     private static void menu(){

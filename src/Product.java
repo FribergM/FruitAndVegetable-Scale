@@ -34,9 +34,6 @@ public class Product {
     public String getName(){
         return this.name;
     }
-    public String getProductGroup(){
-        return this.productGroup;
-    }
     public String getProductCategory(){
         return this.productCategory;
     }
@@ -48,15 +45,6 @@ public class Product {
     }
     public void setName(String name){
         this.name = name;
-    }
-    public void setProductGroup(String productGroup){
-        this.productGroup = productGroup;
-    }
-    public void setProductCategory(String productCategory){
-        this.productCategory = productCategory;
-    }
-    public void setPricePerKg(double pricePerKg){
-        this.pricePerKg = pricePerKg;
     }
     public void setDiscount(Discount discount){
         this.discount = discount;
