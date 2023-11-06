@@ -1,11 +1,8 @@
 import java.io.Console;
 import java.util.ArrayList;
 
-/**
- * Name: Måns Friberg
- * Email: mans.friberg@iths.se
- * GitHub: https://github.com/FribergM/FruitAndVegetable-Scale
- */
+//Name: Måns Friberg
+//Email: mans.friberg@iths.se
 
 public class AdminManagement {
     private static ArrayList<Admin> adminList = new ArrayList<>();

@@ -2,11 +2,8 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Name: Måns Friberg
- * Email: mans.friberg@iths.se
- * GitHub: https://github.com/FribergM/FruitAndVegetable-Scale
- */
+//Name: Måns Friberg
+//Email: mans.friberg@iths.se
 
 public class FileManagement {
     private static ProductManagement productManagement = new ProductManagement();

@@ -1,10 +1,7 @@
 import java.util.ArrayList;
 
-/**
- * Name: Måns Friberg
- * Email: mans.friberg@iths.se
- * GitHub: https://github.com/FribergM/FruitAndVegetable-Scale
- */
+//Name: Måns Friberg
+//Email: mans.friberg@iths.se
 
 public class ProductManagement {
     public static String[] productGroup;

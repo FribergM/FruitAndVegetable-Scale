@@ -1,11 +1,8 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-/**
- * Name: Måns Friberg
- * Email: mans.friberg@iths.se
- * GitHub: https://github.com/FribergM/FruitAndVegetable-Scale
- */
+//Name: Måns Friberg
+//Email: mans.friberg@iths.se
 
 public class Main {
     public static Scanner input = new Scanner(System.in);
