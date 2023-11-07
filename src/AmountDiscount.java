@@ -21,7 +21,7 @@ public class AmountDiscount implements Discount{
         return (amount + "kr off").replace('.',',');
     }
     @Override
-    public String discountTypeString(){ //Used for saving to product file
+    public String discountPropertiesToString(){ //Used for saving to product file
         return "Amount%"+amount;
     }
 }

@@ -24,7 +24,7 @@ public class Product {
         updateDiscountedPrice();
     }
     public void updateDiscountedPrice(){
-        if(discount != null){
+        if(discount != null){ // Only used for toString.
             discountedPrice = discount.applyDiscountForPrint(this);
         }
     }
@@ -63,7 +63,7 @@ public class Product {
         if(discount == null){
             return name+','+productGroup+','+productCategory+','+pricePerKg+','+"null";
         }else{
-            return name+','+productGroup+','+productCategory+','+pricePerKg+','+discount.discountTypeString();
+            return name+','+productGroup+','+productCategory+','+pricePerKg+','+discount.discountPropertiesToString();
         }
 
     }

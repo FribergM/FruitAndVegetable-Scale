@@ -32,7 +32,7 @@ public class PercentDiscountIf implements Discount{
         return (discountPercentage + "% off (if >= "+minWeightForDiscount+"kg)").replace('.',',');
     }
     @Override
-    public String discountTypeString(){ //Used for saving to product file
+    public String discountPropertiesToString(){ //Used for saving to product file
         return "PercentIf%"+discountPercentage+'%'+minWeightForDiscount;
     }
 }

@@ -85,7 +85,7 @@ public class ProductManagement {
         }
 
         if(Main.isAdmin){
-            registerDiscount(chosenProduct);
+            addNewDiscount(chosenProduct);
         }else{
             createCartItem(chosenProduct);
         }
@@ -144,7 +144,7 @@ public class ProductManagement {
         }
 
         if(Main.isAdmin){
-            registerDiscount(chosenProduct);
+            addNewDiscount(chosenProduct);
         }else{
             createCartItem(chosenProduct);
         }
@@ -231,7 +231,7 @@ public class ProductManagement {
 
         System.out.println(productName+" has been registered!");
 
-        FileManagement.saveProductsToTextFiles(FileManagement.productsFilePath);
+        FileManagement.saveProductsToTextFiles(FileManagement.productsDirectoryPath);
     }
     private void registerProductInCategory(Product newProduct){
         String category = newProduct.getProductCategory();
@@ -287,7 +287,7 @@ public class ProductManagement {
             }
         }
 
-        FileManagement.saveProductsToTextFiles(FileManagement.productsFilePath);
+        FileManagement.saveProductsToTextFiles(FileManagement.productsDirectoryPath);
 
         tempProductList.clear();
     }
@@ -304,7 +304,7 @@ public class ProductManagement {
         System.out.println("-------------------------------------------------------------------------------------------------------------------");
     }
 
-    private void registerDiscount(Product chosenProduct){
+    private void addNewDiscount(Product chosenProduct){
 
         int discountChoice = getDiscountType();
 
@@ -313,7 +313,7 @@ public class ProductManagement {
             return;
         }
 
-        // Gets discount value (% or flat amount) + conditional threshold if needed.
+        // Gets discount value (% or flat amount) + conditional weight threshold if chosen.
         double[] discountValues = getDiscountValues(discountChoice, chosenProduct);
 
         if(Utility.returnToMenu(discountValues[0])){
@@ -334,7 +334,7 @@ public class ProductManagement {
 
         chosenProduct.updateDiscountedPrice();
         System.out.println("\n"+chosenProduct.getName()+" is now "+chosenProduct.getDiscount());
-        FileManagement.saveProductsToTextFiles(FileManagement.productsFilePath);
+        FileManagement.saveProductsToTextFiles(FileManagement.productsDirectoryPath);
 
     }
     public void updateDiscount(){
@@ -344,9 +344,9 @@ public class ProductManagement {
             return;
         }
 
-        registerDiscount(productToUpdate);
+        addNewDiscount(productToUpdate);
 
-        FileManagement.saveProductsToTextFiles(FileManagement.productsFilePath);
+        FileManagement.saveProductsToTextFiles(FileManagement.productsDirectoryPath);
         tempProductList.clear();
     }
     public void removeDiscount(){
@@ -360,7 +360,7 @@ public class ProductManagement {
 
         System.out.println("\nDiscount removed from: "+productToRemove.getName());
 
-        FileManagement.saveProductsToTextFiles(FileManagement.productsFilePath);
+        FileManagement.saveProductsToTextFiles(FileManagement.productsDirectoryPath);
         tempProductList.clear();
     }
 
@@ -434,13 +434,13 @@ public class ProductManagement {
                 Please choose a discount option by number!
                 
                 DISCOUNT REGISTRATION
-                ---------------------------------------
-                | 1. % Discount                       |
-                | 2. Flat amount discount             |
-                | 3. Conditional '% discount'         |
-                | 4. Conditional flat amount discount |
-                | 0. Return to menu                   |
-                ---------------------------------------""");
+                -----------------------------------------
+                | 1. % Discount                         |
+                | 2. Flat amount discount               |
+                | 3. Conditional '% discount'           |
+                | 4. Conditional 'flat amount discount' |
+                | 0. Return to menu                     |
+                -----------------------------------------""");
 
             discountChoice = Utility.checkIfValidIntInput("discount option",1,4);
 

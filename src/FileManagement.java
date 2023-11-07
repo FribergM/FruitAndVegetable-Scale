@@ -9,7 +9,7 @@ public class FileManagement {
     private static ProductManagement productManagement = new ProductManagement();
     private static AdminManagement adminManagement = new AdminManagement();
 
-    public static final String productsFilePath = "Products\\";
+    public static final String productsDirectoryPath = "Products\\";
 
     public static void saveProductsToTextFiles(String filePath){
 
@@ -51,7 +51,7 @@ public class FileManagement {
     public static void initializeProductsFromFiles(){
 
         for(String category : ProductManagement.productCategory){
-            try(BufferedReader reader = new BufferedReader(new FileReader(productsFilePath+category+".txt"))){
+            try(BufferedReader reader = new BufferedReader(new FileReader(productsDirectoryPath +category+".txt"))){
                 String line;
                 while((line = reader.readLine()) != null){
                     String[] part = line.split(",");

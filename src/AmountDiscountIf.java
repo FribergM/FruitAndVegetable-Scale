@@ -29,7 +29,7 @@ public class AmountDiscountIf implements Discount{
         return (amount + "kr off (if >= "+minWeightForDiscount+"kg)").replace('.',',');
     }
     @Override
-    public String discountTypeString(){ //Used for saving to product file
+    public String discountPropertiesToString(){ //Used for saving to product file
         return "AmountIf%"+amount+'%'+minWeightForDiscount;
     }
 }

@@ -24,7 +24,7 @@ public class PercentDiscount implements Discount{
 //                discountPercentage + "% off";
     }
     @Override
-    public String discountTypeString(){ //Used for saving to product file
+    public String discountPropertiesToString(){ //Used for saving to product file
         return "Percent%"+discountPercentage;
     }
 }
