@@ -22,12 +22,15 @@ public class AdminManagement {
                 System.out.println("\nReturning to menu.");
                 return;
             }
-            System.out.print("Password: ");
+
             String password;
             if(console != null){
+                System.out.print("Password: ");
                 char[] passwordChars = console.readPassword();
                 password = new String(passwordChars);
             }else{
+                System.out.println("\nNOTE: If you want to hide your password, run the program from Terminal. (Check README))");
+                System.out.print("Password: ");
                 password = Main.input.nextLine();
             }
             if(Utility.returnToMenu(password)){

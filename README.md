@@ -1,1 +1,1 @@
-To boot from CMD, please use this prompt from the Project root folder: java -cp out\production\Labb1 Main
+To boot from CMD, please use this prompt from the Project root folder: java -cp out\production\FruitAndVegetable-Scale Main

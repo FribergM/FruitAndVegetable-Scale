@@ -1,7 +1,5 @@
 ### IntelliJ IDEA ###
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+
 
 ### Eclipse ###
 .apt_generated
@@ -11,9 +9,7 @@ out/
 .settings
 .springBeans
 .sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+
 
 ### NetBeans ###
 /nbproject/private/
@@ -27,8 +23,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
-productsBackup.txt
-*.class
 Products - kopia/Apples.txt
 Products - kopia/Citrus Fruit.txt
 Products - kopia/Cole Crops.txt
