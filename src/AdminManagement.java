@@ -1,5 +1,6 @@
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 //Name: Måns Friberg
 //Email: mans.friberg@iths.se
@@ -8,6 +9,8 @@ public class AdminManagement {
     private static ArrayList<Admin> adminList = new ArrayList<>();
 
     public static void adminLogin(){
+        Scanner input = new Scanner(System.in);
+
         boolean isValidCredentials = false;
 
         do{
@@ -17,7 +20,7 @@ public class AdminManagement {
             Console console = System.console();
 
             System.out.print("\nUsername: ");
-            String username = Main.input.nextLine();
+            String username = input.nextLine().trim();
             if(Utility.returnToMenu(username)){
                 System.out.println("\nReturning to menu.");
                 return;
@@ -26,12 +29,11 @@ public class AdminManagement {
             String password;
             if(console != null){
                 System.out.print("Password: ");
-                char[] passwordChars = console.readPassword();
-                password = new String(passwordChars);
+                password = new String(console.readPassword()).trim();
             }else{
-                System.out.println("\nNOTE: If you want to hide your password, run the program from Terminal. (Check README))");
+                System.out.println("\nWARNING: If you want to hide your password, run the program from Terminal. (Check README.md))");
                 System.out.print("Password: ");
-                password = Main.input.nextLine();
+                password = input.nextLine().trim();
             }
             if(Utility.returnToMenu(password)){
                 System.out.println("\nReturning to menu.");
@@ -62,58 +64,37 @@ public class AdminManagement {
         return false;
 
     }
-    public void addNewAdmin(){
-        String adminName;
+    public static void addNewAdmin(){
+
         String adminUsername="USERNAME";
         String adminPassword="PASSWORD";
 
 
-        adminName = createAdminName();
-        if(Utility.returnToMenu(adminName)){
-            System.out.println("\nReturning to main...");
-            return;
-        }
-        adminName = Utility.capitalizeWordsInString(adminName);
 
         adminUsername = createAdminCredentials(adminUsername);
+
         if(Utility.returnToMenu(adminUsername)){
             System.out.println("\nReturning to main...");
             return;
         }
 
         adminPassword = createAdminCredentials(adminPassword);
+
         if(Utility.returnToMenu(adminPassword)){
             System.out.println("\nReturning to main...");
             return;
         }
 
-        adminList.add(new Admin(adminName,adminUsername,adminPassword));
+        adminList.add(new Admin(adminUsername,adminPassword));
         System.out.println("\nAdmin account: "+adminUsername+" created!");
 
 
         FileManagement.saveAdminsToTextFile();
 
     }
-    private String createAdminName(){
-        String adminName;
-        boolean isValidName;
+    private static String createAdminCredentials(String credentialType){
+        Scanner input = new Scanner(System.in);
 
-        do{
-            System.out.println("\nADMIN REGISTRATION\nEnter the NAME of the admin you wish to register. \"0\" to return to main menu.");
-            System.out.print("\nName: ");
-
-            adminName = Main.input.nextLine().toLowerCase();
-
-            isValidName = Utility.checkIfValidString(adminName);
-
-        }while(!isValidName);
-
-        if(Utility.returnToMenu(adminName)){
-            return "0";
-        }
-        return adminName;
-    }
-    private String createAdminCredentials(String credentialType){
         String adminCredential;
         boolean isValidCredential;
 
@@ -123,7 +104,7 @@ public class AdminManagement {
             Utility.capitalizeWordsInString(credentialType);
             System.out.print("\n"+credentialType+": ");
 
-            adminCredential = Main.input.nextLine();
+            adminCredential = input.nextLine().trim();
 
             if(credentialType.equalsIgnoreCase("username")){
                 isValidCredential = checkIfAdminExists(adminCredential);
@@ -142,7 +123,7 @@ public class AdminManagement {
         }
         return adminCredential;
     }
-    private boolean checkIfAdminExists(String newAdminUsername){
+    private static boolean checkIfAdminExists(String newAdminUsername){
         for(Admin admin : adminList){
             if(admin.getUsername().equalsIgnoreCase(newAdminUsername)){
                 System.out.println("An admin with that username already exists. Try again.");
@@ -151,10 +132,10 @@ public class AdminManagement {
         }
         return true;
     }
-    public void addAdminToList(Admin newAdmin){
+    public static void addAdminToList(Admin newAdmin){
         adminList.add(newAdmin);
     }
-    public ArrayList<Admin> getAdminList(){
+    public static ArrayList<Admin> getAdminList(){
         return adminList;
     }
 }

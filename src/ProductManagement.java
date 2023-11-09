@@ -9,7 +9,7 @@ public class ProductManagement {
     private static ShoppingCart shoppingCart = new ShoppingCart();
 
     private static ArrayList<Product> productList = new ArrayList<Product>();
-    public static ArrayList<Product> tempProductList = new ArrayList<Product>();
+    public static ArrayList<Product> tempProductList = new ArrayList<Product>(); // Temporarily stores user-chosen products, mainly used for print
 
     public void initializeProducts() {
 
@@ -66,7 +66,7 @@ public class ProductManagement {
         do {
             System.out.println("\nPRODUCT SEARCH\nEnter the name of the product. \"0\" to return to main menu.");
             System.out.print("\nProduct name: ");
-            String productName = Main.input.nextLine().toLowerCase();
+            String productName = Utility.checkIfValidString();
 
             if(Utility.returnToMenu(productName)) {
                 System.out.println("\nReturning to menu...");
@@ -168,19 +168,13 @@ public class ProductManagement {
         int category;
         double productPrice;
 
-        boolean isValidName;
         do{
             System.out.println("\nPRODUCT REGISTRATION\nEnter the name of the product you wish to register. \"0\" to return to main menu.");
             System.out.print("\nProduct name: ");
 
-            productName = Main.input.nextLine().toLowerCase();
+            productName = Utility.checkIfValidString();
 
-            isValidName = checkIfProductExists(productName);
-
-            if(isValidName){
-                isValidName = Utility.checkIfValidString(productName);
-            }
-        }while(!isValidName);
+        }while(productName.isBlank());
 
         if(Utility.returnToMenu(productName)){
             System.out.println("\nReturning to main...");
@@ -256,7 +250,7 @@ public class ProductManagement {
         do{
             System.out.println("\nPRODUCT REMOVAL\nEnter the name of the product you wish to remove. \"0\" to return to main menu.");
             System.out.print("\nProduct name: ");
-            String productName = Main.input.nextLine().toLowerCase();
+            String productName = Utility.checkIfValidString();
 
             if (Utility.returnToMenu(productName)) {
                 System.out.println("\nReturning to menu...");
@@ -448,7 +442,7 @@ public class ProductManagement {
                 return 0;
             }
 
-        }while(discountChoice<0 || discountChoice>4);
+        }while(discountChoice<1 || discountChoice>4);
 
         return discountChoice;
     }
@@ -477,6 +471,7 @@ public class ProductManagement {
         return true;
     }
     private void findMatchingProduct(String productName){
+        productName = productName.toLowerCase();
         // Adds all products containing the user input into tempProductList.
         for(Product p : productList){
             if(p.getName().toLowerCase().contains(productName)){

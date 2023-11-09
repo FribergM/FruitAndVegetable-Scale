@@ -7,7 +7,6 @@ import java.util.Date;
 
 public class FileManagement {
     private static ProductManagement productManagement = new ProductManagement();
-    private static AdminManagement adminManagement = new AdminManagement();
 
     public static final String productsDirectoryPath = "Products\\";
 
@@ -32,7 +31,7 @@ public class FileManagement {
     }
     public static void saveAdminsToTextFile(){
         clearFile("AdminLogin");
-        for(Admin a : adminManagement.getAdminList()){
+        for(Admin a : AdminManagement.getAdminList()){
             try(BufferedWriter writer = new BufferedWriter(new FileWriter("AdminLogin.txt",true))){
                 writer.write(a.toString()+"\n");
             }catch(IOException e){
@@ -93,12 +92,11 @@ public class FileManagement {
             String line;
             while((line = reader.readLine()) != null){
                 String[] part = line.split(",");
-                String adminName = part[0];
-                String adminUsername = part[1];
-                String adminPassword = part[2];
+                String adminUsername = part[0];
+                String adminPassword = part[1];
 
-                Admin newAdmin = new Admin(adminName,adminUsername,adminPassword);
-                adminManagement.addAdminToList(newAdmin);
+                Admin newAdmin = new Admin(adminUsername,adminPassword);
+                AdminManagement.addAdminToList(newAdmin);
             }
         }catch(IOException e){
             System.out.println("IO EXCEPTION: initializeAdminAccountFromFiles");

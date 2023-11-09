@@ -1,2 +1,2 @@
-Oskar,OskarITHS,1337
-Måns,Fribbe,123
+OskarITHS,1337
+Fribbe,123

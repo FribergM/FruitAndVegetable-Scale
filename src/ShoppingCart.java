@@ -28,21 +28,14 @@ public class ShoppingCart {
                 | 0. Return to menu        |
                 ----------------------------""");
 
-            try {
-                System.out.print("Your choice: ");
+            menuChoice = Utility.checkIfValidIntInput("menu choice",1,3);
 
-                menuChoice = Main.input.nextInt(); Main.input.nextLine();
-
-                switch(menuChoice){
-                    case 1 -> printReceipt();
-                    case 2 -> removeCartItem();
-                    case 3 -> emptyOutCart();
-                    case 0 -> {return;}
-                    default -> System.out.println("\nThat option does not exist. Try again.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("\nInvalid input. Try again.");
-                Main.input.nextLine();
+            switch(menuChoice){
+                case 1 -> printReceipt();
+                case 2 -> removeCartItem();
+                case 3 -> emptyOutCart();
+                case 0 -> {return;}
+                default -> System.out.println("\nThat option does not exist. Try again.");
             }
 
         }while(menuChoice<0 || menuChoice>1);

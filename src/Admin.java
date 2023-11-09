@@ -2,12 +2,10 @@
 //Email: mans.friberg@iths.se
 
 public class Admin {
-    private String name;
     private String username;
     private String password;
 
-    public Admin(String name,String username, String password){
-        this.name = name;
+    public Admin(String username, String password){
         this.username = username;
         this.password = password;
     }
@@ -21,6 +19,6 @@ public class Admin {
 
     @Override
     public String toString() {
-        return name+','+username+','+password;
+        return username+','+password;
     }
 }

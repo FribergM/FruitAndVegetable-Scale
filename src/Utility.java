@@ -1,10 +1,10 @@
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
 //Name: Måns Friberg
 //Email: mans.friberg@iths.se
 
 public class Utility {
-
     public static final String PURPLE = "\033[0;35m";
     public static final String RESET_COLOR = "\033[0m";
 
@@ -52,12 +52,13 @@ public class Utility {
         return confirmationChoice == 1;
     }
     public static int checkIfValidIntInput(String choiceType, int minValue, int maxValue){
+        Scanner input = new Scanner(System.in);
 
         int userChoice=-1; // Set to -1 to not accidentally return to menu if catch() is reached.
 
         try{
             System.out.print("Your choice: ");
-            userChoice = Main.input.nextInt(); Main.input.nextLine();
+            userChoice = input.nextInt(); input.nextLine();
 
             if(returnToMenu(userChoice)){
                 return 0;
@@ -69,13 +70,14 @@ public class Utility {
 
         }catch(InputMismatchException e){
             System.out.println("\nInvalid input. Try again.");
-            Main.input.nextLine();
+            input.nextLine();
         }
         return userChoice;
     }
     public static double checkIfValidDoubleInput(){
+        Scanner input = new Scanner(System.in);
         double value = -1;
-        String valueString = Main.input.nextLine();
+        String valueString = input.nextLine().trim();
         valueString = valueString.replace(',','.');
 
         String regexPattern = "\\d+\\.?\\d*"; // = (1 or more digits)+(1 or 0 '.')+(0 or more digits)
@@ -98,22 +100,30 @@ public class Utility {
         }
         return value;
     }
-    public static boolean checkIfValidString(String userInput){
-        if(!userInput.matches("[A-ZÅÄÖa-zåäö0 ]+") || userInput.contains("0") && userInput.length() > 1){ // Checks to make sure String only consist of valid letters.
+    public static String checkIfValidString(){
+        Scanner input = new Scanner(System.in);
+
+        boolean isValidString = true;
+        String userInput = input.nextLine().trim();
+
+        // Checks to make sure String only consist of valid letters.(Includes 0 to allow for user to return to menu)
+        if(userInput.isBlank()){
+            System.out.println("\nField cannot be left blank. Try again.");
+            isValidString = false;
+        }else if(!userInput.matches("[A-ZÅÄÖa-zåäö0 ]+") || userInput.contains("0") && userInput.length() > 1){
             System.out.println("\nInvalid input. Please only use letters. Try again.");
-            return false;
-        }else if(userInput.isBlank()){
-            System.out.println("\nInvalid input. Field cannot be left blank. Try again.");
-            return false;
+            isValidString = false;
         }
-        return true;
+        return isValidString ? userInput : "";
     }
     public static boolean checkIfValidAdminDetails(String userInput){
-        if(!userInput.matches("[A-Za-z0-9]+")){ // Checks to make sure String only consist of valid letters.
-            System.out.println("\nInvalid input. Only characters 'A-Z' and '0-9' allowed. Try again.");
+
+        if(userInput.isBlank()){
+            System.out.println("\nField cannot be left blank. Try again.");
             return false;
-        }else if(userInput.isBlank()){
-            System.out.println("\nInvalid input. Field cannot be left blank. Try again.");
+        }else if(!userInput.matches("[A-Za-z0-9]+")){
+            // Checks to make sure String only consist of valid letters.
+            System.out.println("\nInvalid input. Only characters 'A-Z' and '0-9' allowed. Try again.");
             return false;
         }
         return true;
