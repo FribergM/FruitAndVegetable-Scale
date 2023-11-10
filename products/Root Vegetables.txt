@@ -1,6 +1,6 @@
 Carrot,Vegetables,Root Vegetables,15.9,null
 Parsnip,Vegetables,Root Vegetables,24.9,null
-Potato,Vegetables,Root Vegetables,15.9,null
+Potato,Vegetables,Root Vegetables,15.9,Percent%30.0
 Sweet Potato,Vegetables,Root Vegetables,29.9,null
 Horseradish,Vegetables,Root Vegetables,129.0,null
 Beetroot,Vegetables,Root Vegetables,19.9,null

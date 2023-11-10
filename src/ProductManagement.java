@@ -68,7 +68,7 @@ public class ProductManagement {
             System.out.print("\nProduct name: ");
             String productName = Utility.checkIfValidString();
 
-            if(Utility.returnToMenu(productName)) {
+            if(Utility.returnToMenu(productName)) {// Handles if user inputs "0" to return to menu.
                 System.out.println("\nReturning to menu...");
                 return;
             }
@@ -85,8 +85,10 @@ public class ProductManagement {
         }
 
         if(Main.isAdmin){
+            //if user is logged in as admin, method is used for registering a discount to a product
             addNewDiscount(chosenProduct);
         }else{
+            //if user is a customer, method is used for creating a cartItem & adding to shopping cart.
             createCartItem(chosenProduct);
         }
         tempProductList.clear();
@@ -95,7 +97,7 @@ public class ProductManagement {
 
         System.out.print("\nPRODUCT SEARCH");
 
-        int userGroupChoice = getGroupChoice();
+        int userGroupChoice = getGroupChoice("navigateToProduct");
 
         if(Utility.returnToMenu(userGroupChoice)){
             System.out.println("\nReturning to menu...");
@@ -127,9 +129,11 @@ public class ProductManagement {
         }
 
         if(userGroupChoice == 4){
+            //Copies all products that have an active discount into tempProductList.
             findDiscountedProducts();
         }else{
             for(Product p : productList){
+                //Copies all products of matching category into tempProductList.
                 if (p.getProductCategory().equals(productCategory[userCategoryChoice])) {
                     tempProductList.add(p);
                 }
@@ -144,8 +148,10 @@ public class ProductManagement {
         }
 
         if(Main.isAdmin){
+            //if user is logged in as admin, method is used for registering a discount to a product
             addNewDiscount(chosenProduct);
         }else{
+            //if user is a customer, method is used for creating a cartItem & adding to shopping cart.
             createCartItem(chosenProduct);
         }
         tempProductList.clear();
@@ -174,7 +180,7 @@ public class ProductManagement {
 
             productName = Utility.checkIfValidString();
 
-        }while(productName.isBlank());
+        }while(productName.isBlank() || checkIfProductAlreadyExists(productName));
 
         if(Utility.returnToMenu(productName)){
             System.out.println("\nReturning to main...");
@@ -182,18 +188,19 @@ public class ProductManagement {
         }
         productName = Utility.capitalizeWordsInString(productName);
 
-        group = getGroupChoice();
+        group = getGroupChoice("addNewProduct");
 
         if(Utility.returnToMenu(group)){
             System.out.println("\nReturning to main...");
             return;
         }
 
-        category = -1;
         if(group == 1){
-            category = getCategoryChoice(group,1,4);
+            category = getCategoryChoice(group,1,4); // 1-4 as there are 4 fruit categories.
         }else if(group == 2) {
-            category = getCategoryChoice(group, 1, 5);
+            category = getCategoryChoice(group, 1, 5); // 1-5 as there are 5 vegetable categories.
+        }else{
+            category = getCategoryChoice(group, 1, 1); // 1-1 as there is only 1 other category.
         }
 
         if(Utility.returnToMenu(category)){
@@ -218,6 +225,7 @@ public class ProductManagement {
                 System.out.println("\nReturning to main...");
                 return;
             }
+
         }while(productPrice <= 0);
 
         Product newProduct = new Product(productName,productGroup[group-1], productCategory[category],productPrice);
@@ -307,22 +315,31 @@ public class ProductManagement {
             return;
         }
 
-        // Gets discount value (% or flat amount) + conditional weight threshold if chosen.
-        double[] discountValues = getDiscountValues(discountChoice, chosenProduct);
+        // Gets discount % or flat amount.
+        double discountAmount = getDiscountAmount(discountChoice,chosenProduct);
 
-        if(Utility.returnToMenu(discountValues[0])){
+        if(Utility.returnToMenu(discountAmount)){
             System.out.println("\nReturning to menu...");
             return;
         }
-        double discountAmount = discountValues[0];
-        double discountWeightThreshold = discountValues[1];
+
+        double discountWeightThreshold = -1;
+
+        if(discountChoice == 3 || discountChoice == 4){
+            // Gets the weight threshold for discount to take effect.
+            discountWeightThreshold = getDiscountWeightThreshold();
+        }
+
+        if(Utility.returnToMenu(discountWeightThreshold)){
+            System.out.println("\nReturning to menu...");
+            return;
+        }
 
         switch(discountChoice){
             case 1 -> chosenProduct.setDiscount(new PercentDiscount(discountAmount));
             case 2 -> chosenProduct.setDiscount(new AmountDiscount(discountAmount));
             case 3 -> chosenProduct.setDiscount(new PercentDiscountIf(discountAmount,discountWeightThreshold));
             case 4 -> chosenProduct.setDiscount(new AmountDiscountIf(discountAmount,discountWeightThreshold));
-            case 0 -> System.out.println("\nReturning to menu...");
             default -> System.out.println("\nThat option does not exist. Try again.");
         }
 
@@ -338,7 +355,7 @@ public class ProductManagement {
             return;
         }
 
-        addNewDiscount(productToUpdate);
+        addNewDiscount(productToUpdate); //Overrides existing discount
 
         FileManagement.saveProductsToTextFiles(FileManagement.productsDirectoryPath);
         tempProductList.clear();
@@ -359,6 +376,7 @@ public class ProductManagement {
     }
 
     private void findDiscountedProducts(){
+        //Copies all products that have an active discount into tempProductList.
         for(Product product : productList){
             if(product.getDiscount() != null){
                 tempProductList.add(product);
@@ -374,15 +392,16 @@ public class ProductManagement {
         }
         return false;
     }
-    public double[] getDiscountValues(int discountChoice, Product chosenProduct){
-        double[] discountValues = new double[2];
+    private double getDiscountAmount(int discountChoice,Product chosenProduct){
+        double discountAmount;
         boolean continueLooping = true;
+
         do{
             if(discountChoice == 1 || discountChoice == 3){
                 System.out.println("\nEnter the discount percentage (1-100) \"0\" to return to menu.");
                 System.out.print("Percentage: ");
-                discountValues[0] = Utility.checkIfValidDoubleInput();
-                if(discountValues[0]<0 || discountValues[0]>100){
+                discountAmount = Utility.checkIfValidDoubleInput();
+                if(discountAmount<0 || discountAmount>100){
                     System.out.println("\nOnly a discount between 0-100% allowed. Try again.");
                 }else{
                     continueLooping = false;
@@ -391,33 +410,37 @@ public class ProductManagement {
                 double productPrice = chosenProduct.getPricePerKg();
                 System.out.println("\nEnter a discount amount (0-"+productPrice+") \"0\" to return to menu.");
                 System.out.print("Discount: ");
-                discountValues[0] = Utility.checkIfValidDoubleInput();
-                if(discountValues[0]<0 || discountValues[0]>productPrice){
+                discountAmount = Utility.checkIfValidDoubleInput();
+                if(discountAmount<0 || discountAmount>productPrice){
                     System.out.println("\nOnly a discount between 0-"+productPrice+" allowed. Try again.");
                 }else{
                     continueLooping = false;
                 }
             }
+
+            if(Utility.returnToMenu(discountAmount)){
+                return 0.0;
+            }
+
         }while(continueLooping);
 
-        if(Utility.returnToMenu(discountValues[0])){
-            return discountValues;
-        }
-
+        return discountAmount;
+    }
+    private double getDiscountWeightThreshold(){
+        double discountWeightThreshold;
         do{
-            if(discountChoice == 3 || discountChoice == 4){
-                System.out.println("\nEnter the weight threshold for the discount in Kg. \"0\" to return to menu");
-                System.out.print("\nWeight: ");
-                discountValues[1] = Utility.checkIfValidDoubleInput();
 
-                if(Utility.returnToMenu(discountValues[1])){
-                    discountValues[0] = 0.0;
-                    return discountValues;
-                }
+            System.out.println("\nEnter the weight threshold for the discount in Kg. \"0\" to return to menu");
+            System.out.print("\nWeight: ");
+            discountWeightThreshold = Utility.checkIfValidDoubleInput();
+
+            if(Utility.returnToMenu(discountWeightThreshold)){
+                return 0.0;
             }
-        }while(discountValues[1] == -1);
 
-        return discountValues;
+        }while(discountWeightThreshold == -1);
+
+        return discountWeightThreshold;
     }
     private int getDiscountType(){
         int discountChoice;
@@ -446,7 +469,7 @@ public class ProductManagement {
 
         return discountChoice;
     }
-    public Product getDiscountedProduct(){
+    public Product getDiscountedProduct(){//Checks if discounted product(s) exist, let user choose one and return chosen product.
 
         if(checkIfDiscountExists()){
             findDiscountedProducts();
@@ -459,16 +482,16 @@ public class ProductManagement {
         return getChosenProduct();
     }
 
-    private boolean checkIfProductExists(String productName){
+    private boolean checkIfProductAlreadyExists(String productName){
 
         for(Product p : productList){
             if(productName.equalsIgnoreCase(p.getName())){
                 System.out.println("\nA product with that name already exists. Try again.");
-                return false;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
     private void findMatchingProduct(String productName){
         productName = productName.toLowerCase();
@@ -482,12 +505,14 @@ public class ProductManagement {
             System.out.println("\nNo product found. Try again.");
         }
     }
-    private int getGroupChoice(){
+    private int getGroupChoice(String calledFromMethod){
 
         int userGroupChoice;
         int showIfDiscountExists;
 
-        if(checkIfDiscountExists()){//Hides "Discounted products" Group choice if none exist.
+        //Hides "Discounted products" Group choice if none exists. OR if method is called from 'addNewProduct()',
+        //since you shouldn't be able to add a product directly into 'Discounted Products' category.
+        if(checkIfDiscountExists() && !calledFromMethod.equals("addNewProduct")){
             showIfDiscountExists = 1;
         }else{
             showIfDiscountExists = 0;
@@ -496,7 +521,7 @@ public class ProductManagement {
         do{
             System.out.println("\nChoose a product group by number. \"0\" to return to main menu.");
 
-            printProductGroups();
+            printProductGroups(calledFromMethod);
 
             userGroupChoice = Utility.checkIfValidIntInput("product group",1,3+ showIfDiscountExists);
 
@@ -534,7 +559,8 @@ public class ProductManagement {
         do{
             System.out.println("\nChoose a product by number. \"0\" to return to main menu.");
 
-            printProducts();
+            //Prints all products that have been copied into the tempProductList
+            printTempProducts();
 
             productChoice = Utility.checkIfValidIntInput("product",1, tempProductList.size());
 
@@ -545,7 +571,7 @@ public class ProductManagement {
 
         }while(productChoice <1 || productChoice > tempProductList.size());
 
-        return tempProductList.get(productChoice-1); // -1 to get the matching index of desired choice.
+        return tempProductList.get(productChoice-1); // Returns the chosen product from tempProductList
     }
     private double getProductAmountByWeight(Product chosenProduct){
 
@@ -573,7 +599,7 @@ public class ProductManagement {
 
     private void printInfoHeader(String calledFromMethod){
 
-        if(calledFromMethod.equals("printProducts")){
+        if(calledFromMethod.equals("printTempProducts")){
             System.out.println("-----------------------------------------------------------------------------------------------------------------------");
             System.out.printf("| %-24s| %-13s| %-17s| %-13s| %-25s| %-13s |%n","Product","Group","Category","Price","Active Discount","Reduced Price");
             System.out.println("-----------------------------------------------------------------------------------------------------------------------");
@@ -584,18 +610,20 @@ public class ProductManagement {
         }
 
     }
-    private void printProductGroups(){
-        int ignoreLastIfNoDiscount;
+    private void printProductGroups(String calledFromMethod){
+        int showIfDiscountExists;
 
-        if(checkIfDiscountExists()){//Hides "Discounted products" Group choice if none exist.
-            ignoreLastIfNoDiscount = 0;
+        //Hides "Discounted products" Group choice if none exists. OR if method is called from 'addNewProduct()',
+        //since you shouldn't be able to add a product directly into 'Discounted Products' category.
+        if(checkIfDiscountExists() && !calledFromMethod.equals("addNewProduct")){
+            showIfDiscountExists = 0;
         }else{
-            ignoreLastIfNoDiscount = 1;
+            showIfDiscountExists = 1;
         }
 
         System.out.println("\nGROUPS:");
         System.out.println("----------------------------");
-        for(int i=0;i<productGroup.length-ignoreLastIfNoDiscount;i++){
+        for(int i=0;i<productGroup.length-showIfDiscountExists; i++){
             System.out.printf("| %-3s %-20s |%n",(i+1)+".",productGroup[i]);
         }
         System.out.println("----------------------------");
@@ -616,10 +644,10 @@ public class ProductManagement {
         }
         System.out.println("-------------------------");
     }
-    private void printProducts(){
+    private void printTempProducts(){
 
         System.out.println("\nAVAILABLE PRODUCTS:");
-        printInfoHeader("printProducts");
+        printInfoHeader("printTempProducts");
 
         for(int i = 0; i< tempProductList.size(); i++){
             System.out.printf("| %-3s %s |%n",(i+1)+".", tempProductList.get(i));

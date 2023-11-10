@@ -17,14 +17,14 @@ public class AdminManagement {
 
             System.out.println("\nADMIN LOGIN\n\nEnter login credentials. \"0\" to return to main menu.");
 
-            Console console = System.console();
-
             System.out.print("\nUsername: ");
             String username = input.nextLine().trim();
             if(Utility.returnToMenu(username)){
                 System.out.println("\nReturning to menu.");
                 return;
             }
+
+            Console console = System.console();
 
             String password;
             if(console != null){
@@ -107,7 +107,7 @@ public class AdminManagement {
             adminCredential = input.nextLine().trim();
 
             if(credentialType.equalsIgnoreCase("username")){
-                isValidCredential = checkIfAdminExists(adminCredential);
+                isValidCredential = checkIfAdminAlreadyExists(adminCredential);
             }else{
                 isValidCredential = true;
             }
@@ -123,7 +123,7 @@ public class AdminManagement {
         }
         return adminCredential;
     }
-    private static boolean checkIfAdminExists(String newAdminUsername){
+    private static boolean checkIfAdminAlreadyExists(String newAdminUsername){
         for(Admin admin : adminList){
             if(admin.getUsername().equalsIgnoreCase(newAdminUsername)){
                 System.out.println("An admin with that username already exists. Try again.");

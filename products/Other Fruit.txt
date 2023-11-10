@@ -1,4 +1,4 @@
-Banana,Fruit,Other Fruit,23.9,null
+Banana,Fruit,Other Fruit,23.9,Percent%50.0
 Banana Eco,Fruit,Other Fruit,28.9,null
 Watermelon,Fruit,Other Fruit,24.9,null
 Cantaloupe,Fruit,Other Fruit,49.9,null

@@ -1,7 +1,7 @@
 Brussels Sprouts,Vegetables,Cole Crops,39.9,null
 Broccoli,Vegetables,Cole Crops,67.9,null
 Turnip,Vegetables,Cole Crops,54.9,null
-Cauliflower,Vegetables,Cole Crops,29.9,null
+Cauliflower,Vegetables,Cole Crops,29.9,PercentIf%30.0%0.7
 Cabbage,Vegetables,Cole Crops,19.9,null
 Red Cabbage,Vegetables,Cole Crops,24.9,null
 Kale,Vegetables,Cole Crops,95.9,null

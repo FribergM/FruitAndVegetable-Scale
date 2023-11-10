@@ -7,7 +7,7 @@ public class Product {
     private String productCategory;
     private double pricePerKg;
     private Discount discount;
-    private double discountedPrice;
+    private double discountedPrice; // Only used for toString.
 
     public Product(String name, String productGroup, String productCategory, double pricePerKg){
         this.name = name;
@@ -24,7 +24,7 @@ public class Product {
         updateDiscountedPrice();
     }
     public void updateDiscountedPrice(){
-        if(discount != null){ // Only used for toString.
+        if(discount != null){// Only used for toString.
             discountedPrice = discount.applyDiscountForPrint(this);
         }
     }

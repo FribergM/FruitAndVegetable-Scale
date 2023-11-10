@@ -1,5 +1,5 @@
 Chanterelle,Other,Mushrooms,199.0,null
-Champignon,Other,Mushrooms,59.9,null
+Champignon,Other,Mushrooms,59.9,PercentIf%25.0%0.5
 Oyster Mushroom,Other,Mushrooms,169.0,null
 Portabello,Other,Mushrooms,99.0,null
 Shiitake,Other,Mushrooms,199.0,null

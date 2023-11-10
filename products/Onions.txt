@@ -3,5 +3,5 @@ Red Onion,Vegetables,Onions,23.9,null
 White Onion,Vegetables,Onions,66.33,null
 Garlic,Vegetables,Onions,69.9,null
 Shallot,Vegetables,Onions,44.9,null
-Leek,Vegetables,Onions,29.9,null
+Leek,Vegetables,Onions,29.9,Amount%5.0
 Green Onion,Vegetables,Onions,19.9,null

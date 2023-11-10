@@ -7,7 +7,7 @@ public class Main {
 
     public static boolean isAdmin = false;
 
-    public static void main(String[] args) { //TODO ADD MORE COMMENTS
+    public static void main(String[] args) {
         greetingMessage();
 
         productManagement.initializeProducts();

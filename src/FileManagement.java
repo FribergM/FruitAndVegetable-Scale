@@ -43,7 +43,7 @@ public class FileManagement {
 
         try(FileWriter clearFile = new FileWriter(fileName+".txt")){
             // overwrites the file with nothing.
-        } catch(IOException e){
+        }catch(IOException e){
             System.out.println("IO EXCEPTION: clearFile");
         }
     }

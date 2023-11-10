@@ -1,7 +1,6 @@
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.InputMismatchException;
 
 //Name: Måns Friberg
 //Email: mans.friberg@iths.se
@@ -10,7 +9,7 @@ public class ShoppingCart {
     private static ArrayList<CartItem> shoppingCart = new ArrayList<>();
 
     public void shoppingCartMenu(){
-        int menuChoice = -1;
+        int menuChoice;
         do{
             if(shoppingCart.isEmpty()){
                 System.out.println("\nShopping cart is empty!");
@@ -52,6 +51,7 @@ public class ShoppingCart {
         boolean alreadyExists = false;
         for(CartItem cartItem : shoppingCart){
 
+            //If a product already exists, just adds their values together instead of having two separate cartItems.
             if(cartItem.getProduct().getName().equals(newCartItem.getProduct().getName())){
                 alreadyExists = true;
                 cartItem.setWeight(cartItem.getWeight() + newCartItem.getWeight());
@@ -104,11 +104,12 @@ public class ShoppingCart {
         System.out.println(getShoppingCartPrint(calledFromMethod));
     }
     public StringBuilder getShoppingCartPrint(String calledFromMethod){
-        StringBuilder printCartContents = new StringBuilder();
         Date currentDate = new Date();
         SimpleDateFormat dateAndTime = new SimpleDateFormat("yyyy.MM.dd '-' HH:mm:ss");
 
-        if(calledFromMethod.equals("removeCartItem")){
+        StringBuilder printCartContents = new StringBuilder();
+
+        if(calledFromMethod.equals("removeCartItem")){// Uses normal for-loop to add numbers to each cart item, adjusting lines for added numbers.
             printCartContents.append("------------------------------------------------------------------------------------------\n");
             printCartContents.append(String.format("| %-24s| %-20s| %-25s| %-11s |%n","Product","Weight * Kr/Kg","Available Discount","Price"));
             printCartContents.append("------------------------------------------------------------------------------------------\n");
@@ -118,7 +119,7 @@ public class ShoppingCart {
             printCartContents.append("------------------------------------------------------------------------------------------\n");
             printCartContents.append(String.format("| Total price: %-37s%36s |%n",getCheckoutPrice(),dateAndTime.format(currentDate)));
             printCartContents.append("------------------------------------------------------------------------------------------");
-        }else{
+        }else{// Uses normal for-each, omitting the numbers for cart items.
             printCartContents.append("--------------------------------------------------------------------------------------\n");
             printCartContents.append(String.format("| %-20s| %-20s| %-25s| %-11s |%n","Product","Weight * Kr/Kg","Available Discount","Price"));
             printCartContents.append("--------------------------------------------------------------------------------------\n");
@@ -129,8 +130,7 @@ public class ShoppingCart {
             printCartContents.append(String.format("| Total price: %-35s%34s |%n",getCheckoutPrice(),dateAndTime.format(currentDate)));
             printCartContents.append("--------------------------------------------------------------------------------------");
         }
-
-
+        
         return printCartContents;
     }
     private void printReceipt(){
